@@ -1,4 +1,5 @@
 import React,{ Fragment,useState } from "react";
+import ReactDOM from 'react-dom';
 import { Link } from "react-router-dom";
 import { FormControl, Input, InputLabel } from '@mui/material';
 import axios from "axios";
@@ -37,7 +38,9 @@ const Login = () => {
     }
 
     return (
-        <Fragment>
+    ReactDOM.render (
+        
+        <div>
             <div className="login">
                 <div className="container">               
                     <div className="row">
@@ -92,7 +95,9 @@ const Login = () => {
                     </div>
                 </div>       
             </div>
-        </Fragment>
+        </div>,
+        document.getElementById('login'))
+        
     )
 }
 

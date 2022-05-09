@@ -3,8 +3,6 @@ import { Refresh } from "@material-ui/icons"
 import { useDispatch } from 'react-redux';
 import { addAgents } from '../redux/actions/addData';
 import { editAgents } from '../redux/actions/editData';
-import { MenuItem } from '@mui/material';
-import { Select } from '@mui/material';
 import { FormControl, Input } from '@mui/material';
 import Alert from '@mui/material/Alert';
 
@@ -76,14 +74,14 @@ const Agent = (props) => {
                   onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                  
-                   <Select className='form-control' 
+                   <select className='form-control' 
                    name='sexe' 
                   value={sexe} 
                   onChange={e => handleChange(e)}> 
-                     <MenuItem>Selectionner un genre</MenuItem>
-                     <MenuItem value='M'>M</MenuItem>
-                     <MenuItem value='F'>F</MenuItem>
-                   </Select>               
+                     <option value="">None</option>
+                     <option value='M'>M</option>
+                     <option value='F'>F</option>
+                   </select>               
                 </div>
                 <div className='form-group'>                 
                   <Input type="date" 
@@ -100,15 +98,15 @@ const Agent = (props) => {
               </div>
               <div className='col-md-6'>
                 <div className='form-group'>                  
-                   <Select className='form-control' 
+                   <select className='form-control' 
                    name='etatcivil' 
                   value={etatcivil} 
                   onChange={e => handleChange(e)}> 
-                     <MenuItem>Selectionner un etat civil</MenuItem>
-                     <MenuItem value='Célibataire'>Célibataire</MenuItem>
-                     <MenuItem value='Marié'>Marié</MenuItem>
-                     <MenuItem value='Autres'>Autres</MenuItem>
-                   </Select>               
+                     <option value="">None</option>
+                     <option value='Célibataire'>Célibataire</option>
+                     <option value='Marié'>Marié</option>
+                     <option value='Autres'>Autres</option>
+                   </select>               
                 </div>
                 <div className='form-group'>                   
                     <Input type="tel" placeholder='+243...' 

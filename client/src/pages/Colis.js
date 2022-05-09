@@ -36,14 +36,13 @@ export const Cols = () =>{
               <span style={{marginLeft:"15px", cursor:"pointer"}} onClick={(e)=>{
                 setDataToSave(params.row)
                 openPopupColis(true)
-              }}><DeleteIcon color="secondary" />Supprimer</span>
-              <span style={{marginLeft:"30px", cursor:"pointer"}} onClick={()=> Modification(params.row)}><Edit color="primary"/> Modifier</span>
+              }}><span style={{marginLeft:"15px", cursor:"pointer"}} onClick={()=> Modification(params.row)}><Edit color="primary"/> Modifier</span></span>
+              <button className='btn' onClick={()=> deleteColis(params.row._id)}><DeleteIcon color="secondary"/>Supprimer</button>
               </>
           )
         }
       },
-    ];
- 
+    ]; 
     const [openPopupForm, setOpenPopupForm] = useState(false)
     const [rows, setRows] = useState([])
     const [enregistrement, setEnregistrement] = useState()
@@ -54,6 +53,12 @@ export const Cols = () =>{
       })
     },[enregistrement])
     console.log(rows)
+    const deleteColis = async (id) =>{
+      await axios.delete(`http://localhost:8000/colis/${id}`)
+        .then((res)=>{
+          setRows(res.data);
+        })        
+    };
     const [filterFn, setFilterFn] = useState({fn:items=>{return items;}})
     const handleChange =(e)=>{
       let target = e.target

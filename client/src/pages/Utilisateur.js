@@ -34,9 +34,9 @@ export const Utilisateur = () =>{
               <span style={{marginLeft:"15px", cursor:"pointer"}} onClick={(e)=>{
                 setDataToSave(params.row)
                 openPopupUsers(true)
-              }}><DeleteIcon color="secondary" />New Users</span>
-              <span style={{marginLeft:"30px", cursor:"pointer"}} onClick={()=> Modification(params.row)}><Edit color="primary"/> Modifier</span>
-              </>
+              }}><span style={{marginLeft:"30px", cursor:"pointer"}} onClick={()=> Modification(params.row)}><Edit color="primary"/> Modifier</span></span>              
+              <button className='btn' onClick={()=> deleteUsers(params.row._id)}><DeleteIcon color="secondary"/>Supprimer</button>
+            </>
           )
         }
       },
@@ -52,6 +52,12 @@ export const Utilisateur = () =>{
       })
     },[enregistrement])
     console.log(rows)
+    const deleteUsers = async (id) =>{
+      await axios.delete(`http://localhost:8000/users/${id}`)
+        .then((res)=>{
+          setRows(res.data);
+        })        
+    };
     const [filterFn, setFilterFn] = useState({fn:items=>{return items;}})
     const handleChange =(e)=>{
       let target = e.target

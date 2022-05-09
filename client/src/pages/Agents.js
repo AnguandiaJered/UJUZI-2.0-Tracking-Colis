@@ -38,8 +38,8 @@ export const Agents = () =>{
               <span style={{marginLeft:"15px", cursor:"pointer"}} onClick={(e)=>{
                 setDataToSave(params.row)
                 openPopupAgent(true)
-              }}><DeleteIcon color="secondary" />Supprimer</span>
-              <span style={{marginLeft:"30px", cursor:"pointer"}} onClick={()=> Modification(params.row)}><Edit color="primary"/> Modifier</span>
+              }}><span style={{marginLeft:"15px", cursor:"pointer"}} onClick={()=> Modification(params.row)}><Edit color="primary"/> Modifier</span></span>
+              <button className='btn' onClick={()=> deleteAgent(params.row._id)}><DeleteIcon color="secondary"/>Supprimer</button>
               </>
           )
         }
@@ -56,6 +56,12 @@ export const Agents = () =>{
       })
     },[enregistrement])
     console.log(rows)
+    const deleteAgent = async (id) =>{
+      await axios.delete(`http://localhost:8000/agent/${id}`)
+        .then((res)=>{
+          setRows(res.data);
+        })        
+    };
     const [filterFn, setFilterFn] = useState({fn:items=>{return items;}})
     const handleChange =(e)=>{
       let target = e.target

@@ -8,7 +8,6 @@ import { isEmpty } from "../pages/Utils";
 import Popup from '../pages/Popup';
 import axios from 'axios';
 import Client from "../modals/Client";
-import { deleteClients } from '../redux/actions/deleteData';
 import { useDispatch } from 'react-redux';
 
 
@@ -24,7 +23,6 @@ export const Clients = () =>{
       setOpenPopupModification(true)
     }
     const dispatch = useDispatch();
-
     const columns = [
      
         { field: 'noms', headerName: 'Noms', width: 250, editable: true },
@@ -36,17 +34,17 @@ export const Clients = () =>{
         renderCell : (params)=>{
           return(
             <>
-              <span style={{marginLeft:"15px", cursor:"pointer"}} onClick={(e)=>{
+              <span style={{marginLeft:"5px", cursor:"pointer"}} onClick={(e)=>{
                 setDataToSave(params.row)
                 openPopupClient(true)
-              }}><DeleteIcon color="secondary" onClick={()=> dispatch(deleteClients(params.row))}/>Supprimer</span>
-              <span style={{marginLeft:"30px", cursor:"pointer"}} onClick={()=> Modification(params.row)}><Edit color="primary"/> Modifier</span>
+              }}><span style={{marginLeft:"15px", cursor:"pointer"}} onClick={()=> Modification(params.row)}><Edit color="primary"/> Modifier</span></span>
+              <button className='btn' onClick={()=> deleteClient(params.row._id)}><DeleteIcon color="secondary"/>Supprimer</button>
               </>
           )
         }
       },
     ];
- 
+
     const [openPopupForm, setOpenPopupForm] = useState(false)
     const [rows, setRows] = useState([])
     const [enregistrement, setEnregistrement] = useState()
@@ -56,12 +54,17 @@ export const Clients = () =>{
         setRows(res.data.client)
       })
     },[enregistrement])
-
+    const deleteClient = async (id) =>{
+      await axios.delete(`http://localhost:8000/client/${id}`)
+        .then((res)=>{
+          setRows(res.data);
+        })        
+    };
     console.log(rows)
+
     const [filterFn, setFilterFn] = useState({fn:items=>{return items;}})
     const handleChange =(e)=>{
-      let target = e.target
-    
+      let target = e.target    
       setFilterFn({
         fn:items =>{
           if(target.value === ""){

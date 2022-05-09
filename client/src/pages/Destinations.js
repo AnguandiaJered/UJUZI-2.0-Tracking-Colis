@@ -32,8 +32,8 @@ export const Destinations = () =>{
               <span style={{marginLeft:"15px", cursor:"pointer"}} onClick={(e)=>{
                 setDataToSave(params.row)
                 openPopupDestination(true)
-              }}><DeleteIcon color="secondary" onClick={() => deleteDestination(params.row)} />Supprimer</span>
-              <span style={{marginLeft:"30px", cursor:"pointer"}} onClick={()=> Modification(params.row)}><Edit color="primary"/> Modifier</span>
+              }}><span style={{marginLeft:"30px", cursor:"pointer"}} onClick={()=> Modification(params.row)}><Edit color="primary"/> Modifier</span></span>
+              <button className='btn' onClick={()=> deleteDestination(params.row._id)}><DeleteIcon color="secondary"/>Supprimer</button>
               </>
           )
         }
@@ -50,10 +50,11 @@ export const Destinations = () =>{
       })
     },[enregistrement])
     console.log(rows)
-    
-     const deleteDestination = async (id)=>{
-        await axios.delete(`http://localhost:8000/destination/${id}`)
-        .then(window.location.reload(false))
+    const deleteDestination = async (id) =>{
+      await axios.delete(`http://localhost:8000/destination/${id}`)
+        .then((res)=>{
+          setRows(res.data);
+        })        
     };
   
     const [filterFn, setFilterFn] = useState({fn:items=>{return items;}})
