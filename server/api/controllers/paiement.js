@@ -6,7 +6,7 @@ const Paiement = require('../models/paiement');
 
 exports.createPaiement = (req, res) => {
     
-    Paiement.find({ _id: req.body._id})
+    Paiement.find({ _id: req.body.id})
     .then(
         (result) => {
             if (result.length > 0) {
@@ -20,7 +20,8 @@ exports.createPaiement = (req, res) => {
                     colis: req.body.colis,
                     montant: req.body.montant,
                     libelle: req.body.libelle,
-                    datepaiement: req.body.datepaiement                                                     
+                    datepaiement: req.body.datepaiement,                                                     
+                    author: req.body.author,                                                     
                 });
                 newPaiement.save()
                     .then(
@@ -32,6 +33,7 @@ exports.createPaiement = (req, res) => {
                             montant: paiement.montant,
                             libelle: paiement.libelle,
                             datepaiement: paiement.datepaiement,                          
+                            author: paiement.author,                          
                         };
                         return res.status(200).json({
                             message: "Le paiement a été effectué avec succès",
@@ -106,9 +108,12 @@ exports.updatePaiement = (req, res) => {
             const modifyiedPaiement = new Paiement(
                 {
                     _id: id,                
+                    client: req.body.client,
+                    colis: req.body.colis,
                     montant: req.body.montant,
                     libelle: req.body.libelle,
-                    datepaiement: req.body.datepaiement 
+                    datepaiement: req.body.datepaiement,   
+                    author: req.body.author,   
                 }
             );
               

@@ -2,9 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
-import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -37,7 +35,7 @@ export const Sidebar = () => {
         
       >
           <div className="navbar-brand">
-                <Link to="/dashboard" className="nav-link">
+                <Link to="/" className="nav-link">
                 <h5 className='text-white'>TRACKING COLIS</h5>
                 </Link>
           </div>    

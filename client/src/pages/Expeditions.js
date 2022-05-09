@@ -30,10 +30,11 @@ export const Expeditions = () =>{
         { field: 'dateExpedition', headerName: 'DateExpedition', width: 150, editable: true },
         { field: 'nomsclient', headerName: 'Noms client destination', width: 200, editable: true },
         { field: 'adresse', headerName: 'Adresse', width: 200, editable: true },
-        { field: 'telephone', headerName: 'Telephone', width: 150, editable: true },
+        { field: 'telephone', headerName: 'Telephone', width: 100, editable: true },
         { field: 'mail', headerName: 'Mail', width: 200, editable: true },
         { field: 'heuredepart', headerName: 'Heure depart', width: 150, editable: true },
         { field: 'heurearrivee', headerName: 'Heure arrivée', width: 150, editable: true },
+        { field: 'author', headerName: 'Author', width: 150, editable: true },
         { field: 'Action', headerName: 'Actions', width: 260, editable: true,
         renderCell : (params)=>{
           return(

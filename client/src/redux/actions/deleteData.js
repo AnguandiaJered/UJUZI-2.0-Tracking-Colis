@@ -26,7 +26,7 @@ export const deleteClients = (clientId) => {
         return axios({
             method: "delete",
             url: `http://localhost:8000/client/${clientId.id}`,    
-        }).then(res => {
+        }).then((res) => {
             dispatch({ type: DELETE_CLIENTS, payload: {clientId} });
         }).catch((err) => console.log(err));
     }
@@ -37,7 +37,7 @@ export const deleteColis = (colisId) => {
         return axios({
             method: "delete",
             url: `http://localhost:8000/colis/${colisId.id}`,    
-        }).then(res => {
+        }).then((res) => {
             dispatch({ type: DELETE_COLIS, payload: {colisId} });
         }).catch((err) => console.log(err));
     }
@@ -48,7 +48,7 @@ export const deleteDestination = (destinationId) => {
         return axios({
             method: "delete",
             url: `http://localhost:8000/destination/${destinationId.id}`,    
-        }).then(res => {
+        }).then((res) => {
             dispatch({ type: DELETE_DESTINATION, payload: {destinationId} });
         }).catch((err) => console.log(err));
     }
@@ -59,7 +59,7 @@ export const deleteExpedition = (expeditionId) => {
         return axios({
             method: "delete",
             url: `http://localhost:8000/expedition/${expeditionId.id}`,    
-        }).then(res => {
+        }).then((res) => {
             dispatch({ type: DELETE_EXPEDITION, payload: {expeditionId} });
         }).catch((err) => console.log(err));
     }
@@ -70,7 +70,7 @@ export const deleteLocalisation = (localisationId) => {
         return axios({
             method: "delete",
             url: `http://localhost:8000/localisation/${localisationId.id}`,    
-        }).then(res => {
+        }).then((res) => {
             dispatch({ type: DELETE_LOCALISATION, payload: {localisationId} });
         }).catch((err) => console.log(err));
     }
@@ -81,7 +81,7 @@ export const deletePaiement = (paiementId) => {
         return axios({
             method: "delete",
             url: `http://localhost:8000/paiement/${paiementId.id}`,    
-        }).then(res => {
+        }).then((res) => {
             dispatch({ type: DELETE_PAIEMENT, payload: {paiementId} });
         }).catch((err) => console.log(err));
     }
@@ -92,7 +92,7 @@ export const deleteUsers = (usersId) => {
         return axios({
             method: "delete",
             url: `http://localhost:8000/users/${usersId.id}`,    
-        }).then(res => {
+        }).then((res) => {
             dispatch({ type: DELETE_USERS, payload: {usersId} });
         }).catch((err) => console.log(err));
     }

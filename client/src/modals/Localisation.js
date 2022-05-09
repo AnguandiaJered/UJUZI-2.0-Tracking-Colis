@@ -38,6 +38,7 @@ const Localisation = (props) => {
                     })
                 })
             setLoading(false)
+            
     }
   
     const UpdateLocalisation = (e)=>{
@@ -50,15 +51,7 @@ const Localisation = (props) => {
         })
         e.preventDefault();
     }
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-    const handleClose = () => {
-      setOpen(false);
-    };
-    
+  
     return(
         <div className="container-fluid">
             

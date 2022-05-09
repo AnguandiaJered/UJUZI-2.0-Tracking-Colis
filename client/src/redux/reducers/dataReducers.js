@@ -77,13 +77,13 @@ export const destinationReducers = (state = initialState, action) => {
         case ADD_DESTINATION:
             return [action.payload, ...state];
         case EDIT_DESTINATION:
-            return state.map((destination) => {
-                if(destination.id === action.payload.id){
+            return state.map((destinations) => {
+                if(destinations.id === action.payload.id){
                     return {
-                        ...destination,
-                        content: action.payload.content,
+                        ...destinations,
+                        destination: action.payload.destination,
                     };
-                } else return destination;
+                } else return destinations;
             });
         case DELETE_DESTINATION:
             return state.filter((destination) => destination.id !== action.payload.destinationId);

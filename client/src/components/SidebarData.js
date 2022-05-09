@@ -13,7 +13,7 @@ import FaxIcon from '@mui/icons-material/Fax';
 export const SidebarData = [
     {
         title: "Dashboard",
-        path: "/dashboard",
+        path: "/",
         icon: <HomeIcon />     
     },
     {

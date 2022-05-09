@@ -8,6 +8,8 @@ import { isEmpty } from "../pages/Utils";
 import Popup from '../pages/Popup';
 import axios from 'axios';
 import Client from "../modals/Client";
+import { deleteClients } from '../redux/actions/deleteData';
+import { useDispatch } from 'react-redux';
 
 
 export const Clients = () =>{
@@ -21,6 +23,7 @@ export const Clients = () =>{
       setDataModi(params)
       setOpenPopupModification(true)
     }
+    const dispatch = useDispatch();
 
     const columns = [
      
@@ -36,7 +39,7 @@ export const Clients = () =>{
               <span style={{marginLeft:"15px", cursor:"pointer"}} onClick={(e)=>{
                 setDataToSave(params.row)
                 openPopupClient(true)
-              }}><DeleteIcon color="secondary" />Supprimer</span>
+              }}><DeleteIcon color="secondary" onClick={()=> dispatch(deleteClients(params.row))}/>Supprimer</span>
               <span style={{marginLeft:"30px", cursor:"pointer"}} onClick={()=> Modification(params.row)}><Edit color="primary"/> Modifier</span>
               </>
           )
@@ -118,7 +121,7 @@ export const Clients = () =>{
              </div>
         }
         <Popup
-            title="Entrer les informations actuelles de client"
+            title="Entrer les informations actuelles du client"
             openPopup={openPopupModification}
             setOpenPopup={setOpenPopupModification}
             >  

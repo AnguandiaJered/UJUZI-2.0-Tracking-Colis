@@ -6,7 +6,7 @@ const Expedition = require('../models/expedition');
 
 exports.createExpedition = (req, res) => {
     
-    Expedition.find({ _id: req.body._id})
+    Expedition.find({ _id: req.body.id})
     .then(
         (result) => {
             if (result.length > 0) {
@@ -25,7 +25,8 @@ exports.createExpedition = (req, res) => {
                     telephone: req.body.telephone,
                     mail: req.body.mail,
                     heuredepart: req.body.heuredepart,
-                    heurearrivee: req.body.heurearrivee                                                       
+                    heurearrivee: req.body.heurearrivee,                                                       
+                    author: req.body.author                                                       
                 });
                 newExpedition.save()
                     .then(
@@ -41,7 +42,8 @@ exports.createExpedition = (req, res) => {
                             telephone: expedition.telephone,
                             mail: expedition.mail,
                             heuredepart: expedition.heuredepart,
-                            heurearrivee: expedition.heurearrivee                           
+                            heurearrivee: expedition.heurearrivee,                           
+                            author: expedition.author,                           
                         };
                         return res.status(200).json({
                             message: "L'expedition a été ajoutée avec succès",
@@ -126,7 +128,8 @@ exports.updateExpedition = (req, res) => {
                     telephone: req.body.telephone,
                     mail: req.body.mail,
                     heuredepart: req.body.heuredepart,
-                    heurearrivee: req.body.heurearrivee   
+                    heurearrivee: req.body.heurearrivee,   
+                    author: req.body.author,   
                 }
             );
               

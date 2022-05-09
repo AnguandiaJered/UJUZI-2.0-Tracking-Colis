@@ -9,15 +9,15 @@ const schemaExpedition = mongoose.Schema(
         },
         client:{
             type: String,
-            ref:"Client"
+            required:true
         },
         colis:{
             type: String,
-            ref:"Colis"
+            required:true
         },
         destination:{
             type: String,
-            ref:"Destination"
+            required:true
         },
         dateExpedition:{
             type:Date,
@@ -44,6 +44,10 @@ const schemaExpedition = mongoose.Schema(
             required:true
         },
         heurearrivee:{
+            type:String,
+            required:true
+        },
+        author:{
             type:String,
             required:true
         }

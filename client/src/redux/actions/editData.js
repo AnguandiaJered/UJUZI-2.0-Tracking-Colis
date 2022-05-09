@@ -52,8 +52,8 @@ export const editDestination = (data) => {
         return axios({
             method: "put",
             url: `http://localhost:8000/destination/${data.id}`,
-            data: {...data}
-        }).then(res => {
+            data: {...data},
+        }).then((res) => {
             dispatch({ type: EDIT_DESTINATION, payload: {...data} });
         }).catch((err) => console.log(err));
     }

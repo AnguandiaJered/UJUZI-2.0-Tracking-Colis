@@ -21,7 +21,7 @@ export const Destinations = () =>{
       setDataModi(params)
       setOpenPopupModification(true)
     }
-
+ 
     const columns = [
      
         { field: 'designation', headerName: 'Designation', width: 800, editable: true },
@@ -32,7 +32,7 @@ export const Destinations = () =>{
               <span style={{marginLeft:"15px", cursor:"pointer"}} onClick={(e)=>{
                 setDataToSave(params.row)
                 openPopupDestination(true)
-              }}><DeleteIcon color="secondary" />Supprimer</span>
+              }}><DeleteIcon color="secondary" onClick={() => deleteDestination(params.row)} />Supprimer</span>
               <span style={{marginLeft:"30px", cursor:"pointer"}} onClick={()=> Modification(params.row)}><Edit color="primary"/> Modifier</span>
               </>
           )
@@ -43,13 +43,19 @@ export const Destinations = () =>{
     const [openPopupForm, setOpenPopupForm] = useState(false)
     const [rows, setRows] = useState([])
     const [enregistrement, setEnregistrement] = useState()
-    useEffect(()=>{
-      axios.get('http://localhost:8000/destination/all')
+    useEffect( async()=>{
+      await axios.get('http://localhost:8000/destination/all')
       .then(res =>{
         setRows(res.data.destination)
       })
     },[enregistrement])
     console.log(rows)
+    
+     const deleteDestination = async (id)=>{
+        await axios.delete(`http://localhost:8000/destination/${id}`)
+        .then(window.location.reload(false))
+    };
+  
     const [filterFn, setFilterFn] = useState({fn:items=>{return items;}})
     const handleChange =(e)=>{
       let target = e.target
@@ -113,7 +119,7 @@ export const Destinations = () =>{
              </div>
         }
         <Popup
-            title="Entrer les informations actuelles de localisation"
+            title="Entrer les informations actuelles de la destination"
             openPopup={openPopupModification}
             setOpenPopup={setOpenPopupModification}
             >  

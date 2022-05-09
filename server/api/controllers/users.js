@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-exports.creatUsers = (req, res, next) => {
-    
+exports.creatUsers = (req, res, next) => {  
 
     User.find({ email: req.body.email })
         .then(
@@ -15,7 +14,6 @@ exports.creatUsers = (req, res, next) => {
                     });
                 } else {
                     bcrypt.hash(req.body.password, 10, (err, hash) => {
-
                         if (err) {
                             res.status(500).json(
                                 {
@@ -31,7 +29,7 @@ exports.creatUsers = (req, res, next) => {
                                 email: req.body.email,
                                 password: hash,
                                 role: req.body.role                               
-                            });                       
+                            });                 
 
                             newUsers.save()
                                 .then(
@@ -133,14 +131,6 @@ exports.userLogin = (req, res) => {
         );
 }
 
-// module.exports.findUsers = async(req, res) => {
-//   try {
-//       const users= await User.find();
-//       res.status(200).json({Users:users});
-//   } catch (error) {
-//       res.status(500).json({message:"err"});
-//   }
-// }
 
 exports.findUsers = (req, res) => {
   
@@ -214,6 +204,10 @@ exports.deleteUsers = (req, res) => {
         }
     })
 }
+
+// exports.userLogout = (req,res) =>{
+//     const token = jwt.destroy(token);
+// }
 
 exports.updateUsers = (req, res) => {
     const id = req.params.userId;

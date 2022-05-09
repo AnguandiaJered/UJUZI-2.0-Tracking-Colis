@@ -26,9 +26,10 @@ export const Paiements = () =>{
      
         { field: 'client', headerName: 'Client', width: 170, editable: true },
         { field: 'colis', headerName: 'Colis', width: 150, editable: true },
-        { field: 'montant', headerName: 'Montant', width: 120, editable: true },
-        { field: 'libelle', headerName: 'Libelle', width: 300, editable: true },
+        { field: 'montant', headerName: 'Montant', width: 100, editable: true },
+        { field: 'libelle', headerName: 'Libelle', width: 250, editable: true },
         { field: 'datepaiement', headerName: 'Date paiement', width: 150, editable: true },
+        { field: 'author', headerName: 'Author', width: 150, editable: true },
         { field: 'Action', headerName: 'Actions', width: 260, editable: true,
         renderCell : (params)=>{
           return(

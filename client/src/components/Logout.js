@@ -1,5 +1,4 @@
 import React,{ Fragment } from 'react';
-// import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -19,6 +18,10 @@ export const Logout = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const logout = () =>{
+    localStorage.removeItem("token");
+  }
 
   return (
     <Fragment>
@@ -43,7 +46,7 @@ export const Logout = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions  className="log">
-          <Link to='/login' className='btn btn-success mr-2' onClick={handleClose}>Logout</Link>
+          <Link to='/login' className='btn btn-success mr-2' onClick={logout}>Logout</Link>
           <Link className='btn btn-success mr-5' to='/' onClick={handleClose} autoFocus>
             Cancel
           </Link>

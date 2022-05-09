@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Refresh } from "@material-ui/icons"
 import { useDispatch } from 'react-redux';
 import { addPaiement } from '../redux/actions/addData';
 import { editPaiement } from '../redux/actions/editData';
-import { MenuItem } from '@mui/material';
-import { Select } from '@mui/material';
 import { FormControl, Input } from '@mui/material';
 import Alert from '@mui/material/Alert';
+import axios from "axios";
 
 
 const Paiement = (props) => {
@@ -19,9 +18,10 @@ const Paiement = (props) => {
         colis:"",
         montant:"",
         libelle:"",
-        datepaiement:""
+        datepaiement:"",
+        author:""
       });
-      const {client,colis,montant,libelle,datepaiement} = data;
+      const {client,colis,montant,libelle,datepaiement,author} = data;
         const handleChange = e =>{
             setData({...data,[e.target.name] : e.target.value});
         }
@@ -42,6 +42,7 @@ const Paiement = (props) => {
                     })
                 })
             setLoading(false)
+            
     }
   
     const UpdatePaiement = (e)=>{
@@ -54,12 +55,32 @@ const Paiement = (props) => {
         })
         e.preventDefault();
     }
-    const [open, setOpen] = React.useState(false);
 
-    const handleClose = () => {
-      setOpen(false);
-    };
-    
+    const [rows, setRows] = useState([])
+    const [colise, setColise] = useState([]);
+    const [person, setPerson] = useState([]);
+    useEffect(()=>{
+      axios.get('http://localhost:8000/client/all')
+      .then(res =>{
+        setRows(res.data.client)
+      })
+    },[rows])
+
+    console.log(rows)
+    useEffect(()=>{
+      axios.get('http://localhost:8000/colis/all')
+      .then(res =>{
+        setColise(res.data.colis)
+      })
+    },[colise])
+    useEffect(()=>{
+      axios.get('http://localhost:8000/agent/all')
+      .then(res =>{
+        setPerson(res.data.agent)
+      })
+    },[person])
+
+
     return(
         <div className="container-fluid">
              {message.error !== "" && 
@@ -70,22 +91,28 @@ const Paiement = (props) => {
             <div className='row'>
               <div className='col-md-12'>             
                 <div className='form-group'>                  
-                   <Select className='form-control' 
+                   <select className='form-control' 
                    name='client' 
                   value={client} 
-                  onChange={e => handleChange(e)}> 
-                     <MenuItem>Selectionner un client</MenuItem>
-                     <MenuItem value={client}>{client}</MenuItem>                    
-                   </Select>               
+                  onChange={e => handleChange(e)}>
+                     <option value="">None</option> 
+                    {
+                        rows.map((item => (<option key={item.id}  value={item.noms}>{item.noms}</option>))
+                        )                      
+                    }
+                   </select>               
                 </div>
                 <div className='form-group'>                  
-                   <Select className='form-control' 
+                   <select className='form-control' 
                    name='colis' 
                   value={colis} 
                   onChange={e => handleChange(e)}> 
-                     <MenuItem>Selectionner un colis</MenuItem>
-                     <MenuItem value={colis}>{colis}</MenuItem>                    
-                   </Select>               
+                  <option value="">None</option>
+                     {
+                        colise.map((item => (<option key={item.id}  value={item.designation}>{item.designation}</option>))
+                        )                      
+                    }                    
+                   </select>               
                 </div>         
                 <div className='form-group'>                    
                     <Input type="number" placeholder={paiement ? paiement.montant : "Entrer le montant"} 
@@ -106,6 +133,18 @@ const Paiement = (props) => {
                   className='form-control' 
                   name='datepaiement' value={datepaiement} 
                   onChange={e => handleChange(e)} required/>
+                </div>
+                <div className='form-group'>                  
+                   <select className='form-control' 
+                   name='author' 
+                  value={author} 
+                  onChange={e => handleChange(e)}>
+                     <option value="">None</option>
+                     {
+                        person.map((item => (<option key={item.id}  value={item.noms}>{item.noms}</option>))
+                        )
+                    }                     
+                   </select>               
                 </div>
               </div>
             </div>

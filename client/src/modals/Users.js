@@ -3,8 +3,6 @@ import { Refresh } from "@material-ui/icons"
 import { useDispatch } from 'react-redux';
 import { addUsers } from '../redux/actions/addData';
 import { editUsers } from '../redux/actions/editData';
-import { MenuItem } from '@mui/material';
-import { Select } from '@mui/material';
 import { FormControl, Input } from '@mui/material';
 import Alert from '@mui/material/Alert';
 
@@ -41,6 +39,7 @@ const Users = (props) => {
                     })
                 })
             setLoading(false)
+           
     }
   
     const UpdateUsers = (e)=>{

@@ -42,6 +42,7 @@ const Client = (props) => {
                     })
                 })
             setLoading(false)
+            
     }
   
     const UpdateClient = (e)=>{
@@ -54,15 +55,7 @@ const Client = (props) => {
         })
         e.preventDefault();
     }
-    const [open, setOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-    const handleClose = () => {
-      setOpen(false);
-    };
-    
     return(
         <div className="container-fluid">
 

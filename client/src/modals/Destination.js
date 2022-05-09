@@ -5,6 +5,7 @@ import { addDestination } from '../redux/actions/addData';
 import { editDestination } from '../redux/actions/editData';
 import { FormControl, Input } from '@mui/material';
 import Alert from '@mui/material/Alert';
+import { useParams } from 'react-router-dom';
 
 
 const Destination = (props) => {
@@ -35,31 +36,23 @@ const Destination = (props) => {
                         error : res.data.error
                     })
                 })
-            setLoading(false)
+            setLoading(false)            
     }
   
     const UpdateDestination = (e)=>{
-        e.preventDefault()
-        dispatch(editDestination,data).then((response)=>{
+        e.preventDefault();
+        dispatch(editDestination(data)).then((res)=>{
             setMessage({
-                title : response.data.message, 
-                error : response.data.error
+                title : res.data.message, 
+                error : res.data.error
             })
         })
         e.preventDefault();
     }
-    const [open, setOpen] = React.useState(false);
+    const {id}= useParams();
 
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-    const handleClose = () => {
-      setOpen(false);
-    };
-    
     return(
-        <div className="container-fluid">
-            
+        <div className="container-fluid">            
              {message.error !== "" && 
                 <Alert variant="filled" style={{marginBottom:"10px"}} severity={message.error}>
                     <h6>{message.title}</h6>

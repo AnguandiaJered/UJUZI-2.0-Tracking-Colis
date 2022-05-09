@@ -9,11 +9,11 @@ const schemaPaiement = mongoose.Schema(
         },
         client:{
             type: String,
-            ref:"Client"
+            required:true
         },
         colis:{
             type: String,
-            ref:"Colis"
+            required:true
         },
         montant:{
             type:Number,
@@ -25,6 +25,10 @@ const schemaPaiement = mongoose.Schema(
         },
         datepaiement:{
             type:Date,
+            required:true
+        },
+        author:{
+            type:String,
             required:true
         }
     },

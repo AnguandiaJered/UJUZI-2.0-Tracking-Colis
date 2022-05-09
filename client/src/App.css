@@ -7,8 +7,6 @@
   padding: 0;
   margin: 0;
 }
-
-
 #setting{
   margin-left: 1200px;
   text-align: center;
@@ -18,7 +16,6 @@
   background: #ecf0f1;
   margin-left: 15.7rem;
   width:79rem;
-  /* height: 100%; */
 }
 .titre{
   font-size: 30px;
@@ -36,7 +33,6 @@
 .btn-success{
   background-color: #0098A5!important;
   color: #fff!important;
-  /* width: 100px; */
 }
 .log{
   background-color: #0098A5!important;
@@ -44,7 +40,6 @@
 .login{
   background: #0098A5;
   height: 100vh;
-  
 }
 
 .login-heading{

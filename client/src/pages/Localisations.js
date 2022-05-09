@@ -115,7 +115,7 @@ export const Localisations = () =>{
              </div>
         }
         <Popup
-            title="Entrer les informations actuelles de localisation"
+            title="Entrer les informations actuelles de la localisation"
             openPopup={openPopupModification}
             setOpenPopup={setOpenPopupModification}
             >  
