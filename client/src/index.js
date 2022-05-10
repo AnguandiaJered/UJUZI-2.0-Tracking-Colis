@@ -6,27 +6,8 @@ import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
-// redux
-import { applyMiddleware , createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import reduxThunk from 'redux-thunk';
-import rootReducer from './redux/reducers';
-import { getClients,getAgents,getColis,getDestination,getExpedition,getLocalisation,getPaiement,getUsers } from './redux/actions/getData';
-// import store from './redux/reducers/store';
+import store from './redux/reducers/store';
 
-const middlewares = [reduxThunk];
-const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(...middlewares)),
-)
-store.dispatch(getClients());
-store.dispatch(getAgents());
-store.dispatch(getColis());
-store.dispatch(getDestination());
-store.dispatch(getExpedition());
-store.dispatch(getLocalisation());
-store.dispatch(getPaiement());
-store.dispatch(getUsers());
 
 ReactDOM.render(
   <React.StrictMode>

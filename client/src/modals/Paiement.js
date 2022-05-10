@@ -93,7 +93,7 @@ const Paiement = (props) => {
                 <div className='form-group'>                  
                    <select className='form-control' 
                    name='client' 
-                  value={client} 
+                  defaultValue={paiement ? paiement.client : client} 
                   onChange={e => handleChange(e)}>
                      <option value="">None</option> 
                     {
@@ -105,7 +105,7 @@ const Paiement = (props) => {
                 <div className='form-group'>                  
                    <select className='form-control' 
                    name='colis' 
-                  value={colis} 
+                  defaultValue={paiement ? paiement.colis : colis}
                   onChange={e => handleChange(e)}> 
                   <option value="">None</option>
                      {
@@ -115,9 +115,10 @@ const Paiement = (props) => {
                    </select>               
                 </div>         
                 <div className='form-group'>                    
-                    <Input type="number" placeholder={paiement ? paiement.montant : "Entrer le montant"} 
+                    <Input type="number" placeholder="Entrer le montant"
                     className='form-control' 
-                    name='montant' value={montant} 
+                    name='montant' 
+                    defaultValue={paiement ? paiement.montant : montant}
                     onChange={e => handleChange(e)} required/>
                 </div>
               </div>
@@ -125,19 +126,21 @@ const Paiement = (props) => {
                 <div className='form-group'>                    
                     <Input type="text" placeholder='libelle' 
                     className='form-control' 
-                    name='libelle' value={libelle} 
+                    name='libelle' 
+                    defaultValue={paiement ? paiement.libelle : libelle} 
                     onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>              
                   <Input type="date" 
                   className='form-control' 
-                  name='datepaiement' value={datepaiement} 
+                  name='datepaiement' 
+                  defaultValue={paiement ? paiement.datepaiement : datepaiement} 
                   onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                  
                    <select className='form-control' 
                    name='author' 
-                  value={author} 
+                  defaultValue={paiement ? paiement.author : author} 
                   onChange={e => handleChange(e)}>
                      <option value="">None</option>
                      {

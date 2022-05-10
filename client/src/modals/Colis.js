@@ -39,8 +39,7 @@ const Colis = (props) => {
                         error : res.data.error
                     })
                 })
-            setLoading(false)
-           
+            setLoading(false)           
     }
   
     const UpdateColis = (e)=>{
@@ -65,21 +64,23 @@ const Colis = (props) => {
             <div className='row'>
               <div className='col-md-12'>
                 <div className='form-group'>              
-                  <Input type="text" placeholder={colis ? colis.designation : "Entrer la designation"} 
+                  <Input type="text" placeholder="Entrer la designation"
                   className='form-control' 
-                  name='designation' value={designation} 
+                  name='designation' 
+                  defaultValue={colis ? colis.designation : designation} 
                   onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>              
                   <Input type="number" placeholder='Nombre colis' 
                   className='form-control' 
-                  name='nombrecolis' value={nombrecolis} 
+                  name='nombrecolis' 
+                  defaultValue={colis ? colis.nombrecolis : nombrecolis} 
                   onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>              
                   <Input type="number" placeholder='Poids' 
                   className='form-control' 
-                  name='poids' value={poids} 
+                  name='poids' defaultValue={colis ? colis.poids : poids} 
                   onChange={e => handleChange(e)} required/>
                 </div>
               </div>
@@ -87,13 +88,15 @@ const Colis = (props) => {
                 <div className='form-group'>              
                   <Input type="text" placeholder='nature de colis' 
                   className='form-control' 
-                  name='naturecolis' value={naturecolis} 
+                  name='naturecolis' 
+                  defaultValue={colis ? colis.naturecolis : naturecolis} 
                   onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>              
                   <Input type="number" placeholder='code de colis' 
                   className='form-control' 
-                  name='codecolis' value={codecolis} 
+                  name='codecolis' 
+                  defaultValue={colis ? colis.codecolis : codecolis} 
                   onChange={e => handleChange(e)} required/>
                 </div>
               </div>

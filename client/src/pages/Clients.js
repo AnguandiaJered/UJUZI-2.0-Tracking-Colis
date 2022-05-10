@@ -8,7 +8,6 @@ import { isEmpty } from "../pages/Utils";
 import Popup from '../pages/Popup';
 import axios from 'axios';
 import Client from "../modals/Client";
-import { useDispatch } from 'react-redux';
 
 
 export const Clients = () =>{
@@ -22,7 +21,7 @@ export const Clients = () =>{
       setDataModi(params)
       setOpenPopupModification(true)
     }
-    const dispatch = useDispatch();
+    
     const columns = [
      
         { field: 'noms', headerName: 'Noms', width: 250, editable: true },

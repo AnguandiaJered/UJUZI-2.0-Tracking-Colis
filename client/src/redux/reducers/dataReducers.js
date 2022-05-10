@@ -37,7 +37,7 @@ export const clientReducers = (state = initialState, action) => {
                 if(client.id === action.payload.id){
                     return {
                         ...client,
-                        content: action.payload.content,
+                        clients: action.payload.clients,
                     };
                 } else return client;
             });

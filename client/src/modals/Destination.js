@@ -61,9 +61,10 @@ const Destination = (props) => {
             <div className='row'>
               <div className='col-md-12'>
                 <div className='form-group'>              
-                  <Input type="text" placeholder={destination ? destination.designation : "Entrer la designation"}
+                  <Input type="text" placeholder="Entrer la designation"
                   className='form-control' 
-                  name='designation' value={designation} 
+                  name='designation' 
+                  defaultValue={destination ? destination.designation : designation} 
                   onChange={e => handleChange(e)} required/>
                 </div>              
               </div>              

@@ -5,6 +5,9 @@ import { addClients } from '../redux/actions/addData';
 import { editClients } from '../redux/actions/editData';
 import { FormControl, Input } from '@mui/material';
 import Alert from '@mui/material/Alert';
+import axios from 'axios';
+import { useParams } from "react-router-dom";
+
 
 
 const Client = (props) => {
@@ -42,17 +45,23 @@ const Client = (props) => {
             setLoading(false)
             
     }
-  
-    const UpdateClient = (e)=>{
-        e.preventDefault()
-        dispatch(editClients,data).then((response)=>{
-            setMessage({
-                title : response.data.message, 
-                error : response.data.error
-            })
-        })
+    const {id}= useParams();
+    // const UpdateClient = (e)=>{
+    //     e.preventDefault()
+    //     dispatch(editClients,data).then((response)=>{
+    //         setMessage({
+    //             title : response.data.message, 
+    //             error : response.data.error
+    //         })
+    //     })
+    //     e.preventDefault();
+    // }
+    const UpdateClient = async (e) =>{
         e.preventDefault();
-    }
+        await axios.put(`http://localhost:8000/client/${id}`,data).then((res) =>{
+            setData(res.data);
+        });
+    };
 
     return(
         <div className="container-fluid">
@@ -65,15 +74,15 @@ const Client = (props) => {
                 <div className='row'>
                     <div className='col-md-6'>
                         <div className='form-group'>              
-                            <Input type="text" placeholder={client ? client.noms : "Entrer les noms"}  
+                            <Input type="text" placeholder= "Entrer les noms" 
                             className='form-control' 
-                            name='noms' value={noms} 
+                            name='noms'  defaultValue={client ? client.noms : noms}
                             onChange={e => handleChange(e)} required/>
                         </div>
                         <div className='form-group'>                  
                             <select className='form-control' 
                             name='sexe' 
-                            value={sexe} 
+                            defaultValue={client ? client.sexe : sexe} 
                             onChange={e => handleChange(e)}> 
                                 <option value="">None</option>
                                 <option value='M'>M</option>
@@ -83,7 +92,7 @@ const Client = (props) => {
                         <div className='form-group'>                 
                             <Input type="text" placeholder='Adresse' 
                             className='form-control' 
-                            name='adresse' value={adresse} 
+                            name='adresse' defaultValue={client ? client.adresse : adresse} 
                             onChange={e => handleChange(e)} required/>
                         </div>
                     </div>
@@ -91,13 +100,13 @@ const Client = (props) => {
                         <div className='form-group'>                   
                             <Input type="tel" placeholder='+243...' 
                             className='form-control' 
-                            name='telephone' value={telephone} 
+                            name='telephone' defaultValue={client ? client.telephone : telephone} 
                             onChange={e => handleChange(e)} required/>
                         </div>
                         <div className='form-group'>                   
                             <Input type="email" placeholder='Email...' 
                             className='form-control' 
-                            name='mail' value={mail} 
+                            name='mail' defaultValue={client ? client.mail : mail}
                             onChange={e => handleChange(e)} required/>
                         </div>
                     </div>
@@ -108,7 +117,7 @@ const Client = (props) => {
                         {loading && <Refresh/>} Enregistrer </button> 
                     }
                     {
-                        client && <button className="btn btn-success boutton-classe" onClick={(e)=> UpdateClient(e)}>Modifier</button>
+                        client && <button className="btn btn-success boutton-classe" onClick={()=> UpdateClient(client._id)}>Modifier</button>
                     }
                 </FormControl>
           </form>

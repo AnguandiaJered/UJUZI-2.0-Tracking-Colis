@@ -26,7 +26,7 @@ function App() {
       <Navbar />
       <Sidebar />
       <Switch>
-        <Route path='/login' component={Login} />
+        <Route exact path='/login' component={Login} />
         <Route path='/client' component={Clients} />
         <Route exact path='/' render={() => (
                     token === "true" ? (<Dashboard/>) : (<Redirect to="/login"/>)

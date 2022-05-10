@@ -63,15 +63,17 @@ const Localisation = (props) => {
             <div className='row'>
               <div className='col-md-12'>
                 <div className='form-group'>              
-                  <Input type="text" placeholder={localisation ? localisation.designation : "Entrer la designation"} 
+                  <Input type="text" placeholder="Entrer la designation"
                   className='form-control' 
-                  name='designation' value={designation} 
+                  name='designation' 
+                  defaultValue={localisation ? localisation.designation : designation} 
                   onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>              
                   <Input type="text" placeholder='Longitude' 
                   className='form-control' 
-                  name='longitude' value={longitude} 
+                  name='longitude' 
+                  defaultValue={localisation ? localisation.longitude : longitude}
                   onChange={e => handleChange(e)} required/>
                 </div>                
               </div>
@@ -79,7 +81,8 @@ const Localisation = (props) => {
                 <div className='form-group'>              
                   <Input type="text" placeholder='Latitude' 
                   className='form-control' 
-                  name='latitude' value={latitude} 
+                  name='latitude' 
+                  defaultValue={localisation ? localisation.latitude : latitude} 
                   onChange={e => handleChange(e)} required/>
                 </div>             
               </div>

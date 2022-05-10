@@ -38,8 +38,7 @@ const Users = (props) => {
                         error : res.data.error
                     })
                 })
-            setLoading(false)
-           
+            setLoading(false)           
     }
   
     const UpdateUsers = (e)=>{
@@ -63,30 +62,30 @@ const Users = (props) => {
             <div className='row'>
               <div className='col-md-12'>
                 <FormControl className='col-md-12'>              
-                  <Input type="text" placeholder={users ? users.noms : "Entrer les noms"} 
+                  <Input type="text" placeholder="Entrer les noms"
                   className='form-control' 
-                  name='noms' value={noms} 
+                  name='noms' defaultValue={users ? users.noms : noms}
                   onChange={e => handleChange(e)} required/>
                 </FormControl>
                 <FormControl className='col-md-12'>                 
                   <Input type="email" placeholder='Email' 
                   className='form-control mt-3' 
-                  name='email' value={email} 
+                  name='email' defaultValue={users ? users.email : email} 
                   onChange={e => handleChange(e)} required/>
-                </FormControl>
-                
+                </FormControl>                
               </div>
               <div className='col-md-12'>
                 <FormControl className='col-md-12'>                    
                     <Input type="password" placeholder='Password' 
                     className='form-control mt-3' 
-                    name='password' value={password} 
+                    name='password' 
+                    defaultValue={users ? users.password : password} 
                     onChange={e => handleChange(e)} required/>
                 </FormControl>
                 <FormControl className='col-md-12'>                   
                     <Input type="text" placeholder='Role' 
                     className='form-control mt-3' 
-                    name='role' value={role} 
+                    name='role' defaultValue={users ? users.role : role}
                     onChange={e => handleChange(e)} required/>
                 </FormControl>
               </div>

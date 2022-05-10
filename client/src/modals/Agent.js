@@ -68,15 +68,15 @@ const Agent = (props) => {
             <div className='row'>
               <div className='col-md-6'>
                 <div className='form-group'>              
-                  <Input type="text" placeholder={agent ? agent.noms : "Entrer les noms"} 
+                  <Input type="text" placeholder="Entrer les noms"
                   className='form-control' 
-                  name='noms' value={noms} 
+                  name='noms' defaultValue={agent ? agent.noms : noms}
                   onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                  
                    <select className='form-control' 
                    name='sexe' 
-                  value={sexe} 
+                   defaultValue={agent ? agent.sexe : sexe} 
                   onChange={e => handleChange(e)}> 
                      <option value="">None</option>
                      <option value='M'>M</option>
@@ -86,13 +86,14 @@ const Agent = (props) => {
                 <div className='form-group'>                 
                   <Input type="date" 
                   className='form-control' 
-                  name='datenaissace' value={datenaissance} 
+                  name='datenaissace' 
+                  defaultValue={agent ? agent.datenaissance : datenaissance} 
                   onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                 
                   <Input type="text" placeholder='Adresse' 
                   className='form-control mt-3' 
-                  name='adresse' value={adresse} 
+                  name='adresse' defaultValue={agent ? agent.adresse : adresse} 
                   onChange={e => handleChange(e)} required/>
                 </div>
               </div>
@@ -100,7 +101,7 @@ const Agent = (props) => {
                 <div className='form-group'>                  
                    <select className='form-control' 
                    name='etatcivil' 
-                  value={etatcivil} 
+                   defaultValue={agent ? agent.etatcivil : etatcivil}
                   onChange={e => handleChange(e)}> 
                      <option value="">None</option>
                      <option value='Célibataire'>Célibataire</option>
@@ -111,19 +112,19 @@ const Agent = (props) => {
                 <div className='form-group'>                   
                     <Input type="tel" placeholder='+243...' 
                     className='form-control' 
-                    name='telephone' value={telephone} 
+                    name='telephone' defaultValue={agent ? agent.telephone : telephone}
                     onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                   
                     <Input type="email" placeholder='Email...' 
                     className='form-control' 
-                    name='mail' value={mail} 
+                    name='mail' defaultValue={agent ? agent.mail : mail} 
                     onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                   
                     <Input type="text" placeholder='Fonction...' 
                     className='form-control' 
-                    name='fonction' value={fonction} 
+                    name='fonction' defaultValue={agent ? agent.fonction : fonction} 
                     onChange={e => handleChange(e)} required/>
                 </div>
               </div>

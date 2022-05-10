@@ -1,9 +1,9 @@
-import React,{ Fragment,useState } from "react";
-import ReactDOM from 'react-dom';
+import React,{ useState } from "react";
 import { Link } from "react-router-dom";
 import { FormControl, Input, InputLabel } from '@mui/material';
 import axios from "axios";
 import Alert from '@mui/material/Alert';
+import {useHistory} from 'react-router-dom';
 
 
 const Login = () => {
@@ -23,9 +23,10 @@ const Login = () => {
         title : "", error : ""
     });
 
+    const history = useHistory();
+
     const onSubmit = async (e)=>{
         e.preventDefault()   
-        setLoading(true)
             await axios.post('http://localhost:8000/users/singin',data)
                 .then(res=>{
                     localStorage.setItem('token', res.data[0].token);
@@ -33,13 +34,11 @@ const Login = () => {
                         title : res.data.message, 
                         error : res.data.error
                     }) 
+                    history.push("/") 
                 })              
-            setLoading(false)   
-    }
+            }
 
     return (
-    ReactDOM.render (
-        
         <div>
             <div className="login">
                 <div className="container">               
@@ -95,9 +94,7 @@ const Login = () => {
                     </div>
                 </div>       
             </div>
-        </div>,
-        document.getElementById('login'))
-        
+        </div>
     )
 }
 
