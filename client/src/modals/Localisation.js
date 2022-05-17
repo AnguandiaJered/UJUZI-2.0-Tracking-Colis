@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Refresh } from "@material-ui/icons"
 import { useDispatch } from 'react-redux';
 import { addLocalisation } from '../redux/actions/addData';
-import { editLocalisation } from '../redux/actions/editData';
 import { FormControl, Input } from '@mui/material';
 import Alert from '@mui/material/Alert';
+import axios from 'axios';
 
 
 const Localisation = (props) => {
@@ -15,12 +15,20 @@ const Localisation = (props) => {
     const [data,setData] = useState({
         designation:"",
         longitude:"",
-        latitude:""
+        latitude:"",
+        id : new Date()
       });
       const {designation,longitude,latitude} = data;
-        const handleChange = e =>{
+        
+      const handleChange = e =>{
             setData({...data,[e.target.name] : e.target.value});
         }
+      
+      useEffect(()=>{
+        if(localisation){
+              setData({...localisation})
+          }
+      },[])
 
     const [message, setMessage] = useState({
         title : "", error : ""
@@ -40,17 +48,17 @@ const Localisation = (props) => {
             setLoading(false)
             
     }
-  
+
     const UpdateLocalisation = (e)=>{
-        e.preventDefault()
-        dispatch(editLocalisation,data).then((response)=>{
-            setMessage({
-                title : response.data.message, 
-                error : response.data.error
-            })
-        })
-        e.preventDefault();
-    }
+      e.preventDefault()
+      axios.put(`http://localhost:8000/localisation/${localisation._id}`,data).then((res)=>{
+          setMessage({
+              title : res.data.message, 
+              error : res.data.error
+          })
+      })
+      e.preventDefault();
+  }
   
     return(
         <div className="container-fluid">
@@ -66,14 +74,14 @@ const Localisation = (props) => {
                   <Input type="text" placeholder="Entrer la designation"
                   className='form-control' 
                   name='designation' 
-                  defaultValue={localisation ? localisation.designation : designation} 
+                  value={designation} 
                   onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>              
                   <Input type="text" placeholder='Longitude' 
                   className='form-control' 
                   name='longitude' 
-                  defaultValue={localisation ? localisation.longitude : longitude}
+                  value={longitude}
                   onChange={e => handleChange(e)} required/>
                 </div>                
               </div>
@@ -82,7 +90,7 @@ const Localisation = (props) => {
                   <Input type="text" placeholder='Latitude' 
                   className='form-control' 
                   name='latitude' 
-                  defaultValue={localisation ? localisation.latitude : latitude} 
+                  value={latitude} 
                   onChange={e => handleChange(e)} required/>
                 </div>             
               </div>

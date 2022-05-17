@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Refresh } from "@material-ui/icons"
 import { useDispatch } from 'react-redux';
 import { addUsers } from '../redux/actions/addData';
-import { editUsers } from '../redux/actions/editData';
 import { FormControl, Input } from '@mui/material';
 import Alert from '@mui/material/Alert';
+import axios from 'axios';
+
 
 
 const Users = (props) => {
@@ -16,12 +17,20 @@ const Users = (props) => {
         noms:"",
         email:"",
         password:"",
-        role:""
+        role:"",
+        id : new Date()
       });
       const {noms,email,password,role} = data;
-        const handleChange = e =>{
+        
+      const handleChange = e =>{
             setData({...data,[e.target.name] : e.target.value});
         }
+
+      useEffect(()=>{
+          if(users){
+              setData({...users})
+          }
+      },[])
 
     const [message, setMessage] = useState({
         title : "", error : ""
@@ -40,17 +49,17 @@ const Users = (props) => {
                 })
             setLoading(false)           
     }
-  
+
     const UpdateUsers = (e)=>{
-        e.preventDefault()
-        dispatch(editUsers,data).then((response)=>{
-            setMessage({
-                title : response.data.message, 
-                error : response.data.error
-            })
-        })
-        e.preventDefault();
-    }
+      e.preventDefault()
+      axios.put(`http://localhost:8000/users/${users._id}`,data).then((res)=>{
+          setMessage({
+              title : res.data.message, 
+              error : res.data.error
+          })
+      })
+      e.preventDefault();
+  }
     
     return(
         <div className="container-fluid">           
@@ -64,13 +73,13 @@ const Users = (props) => {
                 <FormControl className='col-md-12'>              
                   <Input type="text" placeholder="Entrer les noms"
                   className='form-control' 
-                  name='noms' defaultValue={users ? users.noms : noms}
+                  name='noms' value={noms}
                   onChange={e => handleChange(e)} required/>
                 </FormControl>
                 <FormControl className='col-md-12'>                 
                   <Input type="email" placeholder='Email' 
                   className='form-control mt-3' 
-                  name='email' defaultValue={users ? users.email : email} 
+                  name='email' value={email}
                   onChange={e => handleChange(e)} required/>
                 </FormControl>                
               </div>
@@ -79,13 +88,13 @@ const Users = (props) => {
                     <Input type="password" placeholder='Password' 
                     className='form-control mt-3' 
                     name='password' 
-                    defaultValue={users ? users.password : password} 
+                    value={password} 
                     onChange={e => handleChange(e)} required/>
                 </FormControl>
                 <FormControl className='col-md-12'>                   
                     <Input type="text" placeholder='Role' 
                     className='form-control mt-3' 
-                    name='role' defaultValue={users ? users.role : role}
+                    name='role' value={role}
                     onChange={e => handleChange(e)} required/>
                 </FormControl>
               </div>

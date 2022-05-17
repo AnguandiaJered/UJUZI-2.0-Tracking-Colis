@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Refresh } from "@material-ui/icons"
 import { useDispatch } from 'react-redux';
 import { addDestination } from '../redux/actions/addData';
-import { editDestination } from '../redux/actions/editData';
 import { FormControl, Input } from '@mui/material';
 import Alert from '@mui/material/Alert';
-import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 
 const Destination = (props) => {
@@ -14,12 +13,20 @@ const Destination = (props) => {
 
     const [loading, setLoading] = useState(false)
     const [data,setData] = useState({
-        designation:""
+        designation:"",
+        id : new Date()
       });
       const {designation} = data;
-        const handleChange = e =>{
-            setData({...data,[e.target.name] : e.target.value});
+
+      const handleChange = e =>{
+          setData({...data,[e.target.name] : e.target.value});
+      }
+
+      useEffect(()=>{
+        if(destination){
+            setData({...destination})
         }
+    },[])
 
     const [message, setMessage] = useState({
         title : "", error : ""
@@ -40,16 +47,15 @@ const Destination = (props) => {
     }
   
     const UpdateDestination = (e)=>{
-        e.preventDefault();
-        dispatch(editDestination(data)).then((res)=>{
-            setMessage({
-                title : res.data.message, 
-                error : res.data.error
-            })
-        })
-        e.preventDefault();
-    }
-    const {id}= useParams();
+      e.preventDefault()
+      axios.put(`http://localhost:8000/destination/${destination._id}`,data).then((res)=>{
+          setMessage({
+              title : res.data.message, 
+              error : res.data.error
+          })
+      })
+      e.preventDefault();
+  }
 
     return(
         <div className="container-fluid">            
@@ -63,8 +69,8 @@ const Destination = (props) => {
                 <div className='form-group'>              
                   <Input type="text" placeholder="Entrer la designation"
                   className='form-control' 
-                  name='designation' 
-                  defaultValue={destination ? destination.designation : designation} 
+                  name='designation'
+                  value={designation}  
                   onChange={e => handleChange(e)} required/>
                 </div>              
               </div>              

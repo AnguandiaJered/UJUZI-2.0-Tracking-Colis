@@ -5,7 +5,6 @@ const schemaExpedition = mongoose.Schema(
         id: {
             type:String,
             required:true,
-            default:new Date(),
         },
         client:{
             type: String,

@@ -4,8 +4,7 @@ const schemaAgent = mongoose.Schema(
     {
         id: {
             type:String,
-            required:true,
-            default:new Date(),
+            required:true
         },
         noms:{
             type:String,

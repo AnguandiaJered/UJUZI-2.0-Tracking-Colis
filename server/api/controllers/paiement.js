@@ -21,7 +21,8 @@ exports.createPaiement = (req, res) => {
                     montant: req.body.montant,
                     libelle: req.body.libelle,
                     datepaiement: req.body.datepaiement,                                                     
-                    author: req.body.author,                                                     
+                    author: req.body.author,
+                    id : req.body.id                                                    
                 });
                 newPaiement.save()
                     .then(

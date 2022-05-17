@@ -5,7 +5,6 @@ const schemaUsers = mongoose.Schema(
         id: {
             type:String,
             required:true,
-            default:new Date(),
         },
         noms:{
             type:String,

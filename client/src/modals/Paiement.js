@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Refresh } from "@material-ui/icons"
 import { useDispatch } from 'react-redux';
 import { addPaiement } from '../redux/actions/addData';
-import { editPaiement } from '../redux/actions/editData';
 import { FormControl, Input } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import axios from "axios";
@@ -19,13 +18,21 @@ const Paiement = (props) => {
         montant:"",
         libelle:"",
         datepaiement:"",
-        author:""
+        author:"",
+        id : new Date()
       });
       const {client,colis,montant,libelle,datepaiement,author} = data;
-        const handleChange = e =>{
+        
+      const handleChange = e =>{
             setData({...data,[e.target.name] : e.target.value});
         }
 
+        useEffect(()=>{
+          if(paiement){
+              setData({...paiement})
+          }
+      },[])
+      
     const [message, setMessage] = useState({
         title : "", error : ""
     });
@@ -46,15 +53,15 @@ const Paiement = (props) => {
     }
   
     const UpdatePaiement = (e)=>{
-        e.preventDefault()
-        dispatch(editPaiement,data).then((response)=>{
-            setMessage({
-                title : response.data.message, 
-                error : response.data.error
-            })
-        })
-        e.preventDefault();
-    }
+      e.preventDefault()
+      axios.put(`http://localhost:8000/paiement/${paiement._id}`,data).then((res)=>{
+          setMessage({
+              title : res.data.message, 
+              error : res.data.error
+          })
+      })
+      e.preventDefault();
+  }
 
     const [rows, setRows] = useState([])
     const [colise, setColise] = useState([]);
@@ -93,7 +100,7 @@ const Paiement = (props) => {
                 <div className='form-group'>                  
                    <select className='form-control' 
                    name='client' 
-                  defaultValue={paiement ? paiement.client : client} 
+                  value={client} 
                   onChange={e => handleChange(e)}>
                      <option value="">None</option> 
                     {
@@ -105,7 +112,7 @@ const Paiement = (props) => {
                 <div className='form-group'>                  
                    <select className='form-control' 
                    name='colis' 
-                  defaultValue={paiement ? paiement.colis : colis}
+                  value={colis}
                   onChange={e => handleChange(e)}> 
                   <option value="">None</option>
                      {
@@ -118,7 +125,7 @@ const Paiement = (props) => {
                     <Input type="number" placeholder="Entrer le montant"
                     className='form-control' 
                     name='montant' 
-                    defaultValue={paiement ? paiement.montant : montant}
+                    value={montant}
                     onChange={e => handleChange(e)} required/>
                 </div>
               </div>
@@ -127,20 +134,20 @@ const Paiement = (props) => {
                     <Input type="text" placeholder='libelle' 
                     className='form-control' 
                     name='libelle' 
-                    defaultValue={paiement ? paiement.libelle : libelle} 
+                    value={libelle}
                     onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>              
                   <Input type="date" 
                   className='form-control' 
                   name='datepaiement' 
-                  defaultValue={paiement ? paiement.datepaiement : datepaiement} 
+                  value={datepaiement} 
                   onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                  
                    <select className='form-control' 
                    name='author' 
-                  defaultValue={paiement ? paiement.author : author} 
+                  value={author} 
                   onChange={e => handleChange(e)}>
                      <option value="">None</option>
                      {

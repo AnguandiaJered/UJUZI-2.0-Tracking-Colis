@@ -26,7 +26,8 @@ exports.createExpedition = (req, res) => {
                     mail: req.body.mail,
                     heuredepart: req.body.heuredepart,
                     heurearrivee: req.body.heurearrivee,                                                       
-                    author: req.body.author                                                       
+                    author: req.body.author,
+                    id : req.body.id                                                      
                 });
                 newExpedition.save()
                     .then(

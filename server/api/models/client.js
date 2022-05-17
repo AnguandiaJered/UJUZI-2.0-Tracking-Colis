@@ -5,7 +5,6 @@ const schemaClient = mongoose.Schema(
         id: {
             type:String,
             required:true,
-            default:new Date(),
         },
         noms:{
             type:String,

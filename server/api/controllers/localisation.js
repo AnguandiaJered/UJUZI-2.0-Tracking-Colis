@@ -15,7 +15,8 @@ exports.createLocalisation = (req,res,next) => {
                         _id: new mongoose.Types.ObjectId,
                         designation: req.body.designation,
                         longitude: req.body.longitude,
-                        latitude: req.body.latitude                      
+                        latitude: req.body.latitude,
+                        id : req.body.id                      
                     }
                 );
                 newLocalisation.save()

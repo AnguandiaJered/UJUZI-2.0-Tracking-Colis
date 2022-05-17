@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Refresh } from "@material-ui/icons"
 import { useDispatch } from 'react-redux';
 import { addColis } from '../redux/actions/addData';
-import { editColis } from '../redux/actions/editData';
 import { FormControl, Input } from '@mui/material';
 import Alert from '@mui/material/Alert';
+import axios from 'axios';
+
 
 
 const Colis = (props) => {
@@ -17,12 +18,21 @@ const Colis = (props) => {
         nombrecolis:"",
         poids:"",
         naturecolis:"",
-        codecolis:""
+        codecolis:"",
+        id : new Date()
       });
+
       const {designation,nombrecolis,poids,naturecolis,codecolis} = data;
+
       const handleChange = e =>{
           setData({...data,[e.target.name] : e.target.value});
       }
+
+    useEffect(()=>{
+      if(colis){
+        setData({...colis})
+      }
+    },[])
 
     const [message, setMessage] = useState({
         title : "", error : ""
@@ -43,19 +53,18 @@ const Colis = (props) => {
     }
   
     const UpdateColis = (e)=>{
-        e.preventDefault()
-        dispatch(editColis,data).then((response)=>{
-            setMessage({
-                title : response.data.message, 
-                error : response.data.error
-            })
-        })
-        e.preventDefault();
-    }
+      e.preventDefault()
+      axios.put(`http://localhost:8000/colis/${colis._id}`,data).then((res)=>{
+          setMessage({
+              title : res.data.message, 
+              error : res.data.error
+          })
+      })
+      e.preventDefault();
+  }
     
     return(
-        <div className="container-fluid">
-            
+        <div className="container-fluid">            
              {message.error !== "" && 
                 <Alert variant="filled" style={{marginBottom:"10px"}} severity={message.error}>
                     <h6>{message.title}</h6>
@@ -67,20 +76,20 @@ const Colis = (props) => {
                   <Input type="text" placeholder="Entrer la designation"
                   className='form-control' 
                   name='designation' 
-                  defaultValue={colis ? colis.designation : designation} 
+                  value={designation}
                   onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>              
                   <Input type="number" placeholder='Nombre colis' 
                   className='form-control' 
                   name='nombrecolis' 
-                  defaultValue={colis ? colis.nombrecolis : nombrecolis} 
+                  value={nombrecolis}
                   onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>              
                   <Input type="number" placeholder='Poids' 
                   className='form-control' 
-                  name='poids' defaultValue={colis ? colis.poids : poids} 
+                  name='poids' value={poids}
                   onChange={e => handleChange(e)} required/>
                 </div>
               </div>
@@ -89,14 +98,14 @@ const Colis = (props) => {
                   <Input type="text" placeholder='nature de colis' 
                   className='form-control' 
                   name='naturecolis' 
-                  defaultValue={colis ? colis.naturecolis : naturecolis} 
+                  value={naturecolis}
                   onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>              
                   <Input type="number" placeholder='code de colis' 
                   className='form-control' 
                   name='codecolis' 
-                  defaultValue={colis ? colis.codecolis : codecolis} 
+                  value={codecolis}
                   onChange={e => handleChange(e)} required/>
                 </div>
               </div>

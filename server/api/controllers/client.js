@@ -18,6 +18,7 @@ exports.createClient = (req,res,next) => {
                         adresse: req.body.adresse,
                         telephone: req.body.telephone,
                         mail: req.body.mail,
+                        id : req.body.id
                     }
                 );
                 newClient.save()

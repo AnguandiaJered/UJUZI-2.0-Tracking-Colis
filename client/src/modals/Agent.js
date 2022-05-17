@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Refresh } from "@material-ui/icons"
 import { useDispatch } from 'react-redux';
 import { addAgents } from '../redux/actions/addData';
-import { editAgents } from '../redux/actions/editData';
 import { FormControl, Input } from '@mui/material';
 import Alert from '@mui/material/Alert';
+import axios from 'axios';
+
 
 
 const Agent = (props) => {
@@ -20,17 +21,26 @@ const Agent = (props) => {
         etatcivil:"",
         telephone:"",
         mail:"",
-        fonction:""
+        fonction:"",
+        id : new Date()
       });
       const {noms,sexe,datenaissance,adresse,etatcivil,telephone,mail,fonction} = data;
         const handleChange = e =>{
             setData({...data,[e.target.name] : e.target.value});
         }
 
+      useEffect(()=>{
+          if(agent){
+              setData({...agent})
+          }
+      },[])
+
     const [message, setMessage] = useState({
         title : "", error : ""
     });
+
     const dispatch = useDispatch()
+
     const onSubmitAgent = async (event)=>{
         event.preventDefault()   
         setLoading(true)
@@ -47,19 +57,18 @@ const Agent = (props) => {
     }
   
     const UpdateAgent = (e)=>{
-        e.preventDefault()
-        dispatch(editAgents,data).then((response)=>{
-            setMessage({
-                title : response.data.message, 
-                error : response.data.error
-            })
-        })
-        e.preventDefault();
-    }
+      e.preventDefault()
+      axios.put(`http://localhost:8000/agent/${agent._id}`,data).then((res)=>{
+          setMessage({
+              title : res.data.message, 
+              error : res.data.error
+          })
+      })
+      e.preventDefault();
+  }
     
     return(
-        <div className="container-fluid">
-            
+        <div className="container-fluid">            
              {message.error !== "" && 
                 <Alert variant="filled" style={{marginBottom:"10px"}} severity={message.error}>
                     <h6>{message.title}</h6>
@@ -70,13 +79,12 @@ const Agent = (props) => {
                 <div className='form-group'>              
                   <Input type="text" placeholder="Entrer les noms"
                   className='form-control' 
-                  name='noms' defaultValue={agent ? agent.noms : noms}
+                  name='noms' value={noms}
                   onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                  
                    <select className='form-control' 
-                   name='sexe' 
-                   defaultValue={agent ? agent.sexe : sexe} 
+                   name='sexe' value={sexe}
                   onChange={e => handleChange(e)}> 
                      <option value="">None</option>
                      <option value='M'>M</option>
@@ -86,14 +94,14 @@ const Agent = (props) => {
                 <div className='form-group'>                 
                   <Input type="date" 
                   className='form-control' 
-                  name='datenaissace' 
-                  defaultValue={agent ? agent.datenaissance : datenaissance} 
+                  name='datenaissance' 
+                  value={datenaissance}
                   onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                 
                   <Input type="text" placeholder='Adresse' 
                   className='form-control mt-3' 
-                  name='adresse' defaultValue={agent ? agent.adresse : adresse} 
+                  name='adresse' value={adresse}
                   onChange={e => handleChange(e)} required/>
                 </div>
               </div>
@@ -101,7 +109,7 @@ const Agent = (props) => {
                 <div className='form-group'>                  
                    <select className='form-control' 
                    name='etatcivil' 
-                   defaultValue={agent ? agent.etatcivil : etatcivil}
+                   value={etatcivil}
                   onChange={e => handleChange(e)}> 
                      <option value="">None</option>
                      <option value='Célibataire'>Célibataire</option>
@@ -112,19 +120,19 @@ const Agent = (props) => {
                 <div className='form-group'>                   
                     <Input type="tel" placeholder='+243...' 
                     className='form-control' 
-                    name='telephone' defaultValue={agent ? agent.telephone : telephone}
+                    name='telephone' value={telephone}
                     onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                   
                     <Input type="email" placeholder='Email...' 
                     className='form-control' 
-                    name='mail' defaultValue={agent ? agent.mail : mail} 
+                    name='mail' value={mail} 
                     onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                   
                     <Input type="text" placeholder='Fonction...' 
                     className='form-control' 
-                    name='fonction' defaultValue={agent ? agent.fonction : fonction} 
+                    name='fonction' value={fonction} 
                     onChange={e => handleChange(e)} required/>
                 </div>
               </div>

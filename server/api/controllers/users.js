@@ -28,7 +28,8 @@ exports.creatUsers = (req, res, next) => {
                                 noms: req.body.noms,
                                 email: req.body.email,
                                 password: hash,
-                                role: req.body.role                               
+                                role: req.body.role,
+                                id : req.body.id                               
                             });                 
 
                             newUsers.save()
@@ -205,9 +206,6 @@ exports.deleteUsers = (req, res) => {
     })
 }
 
-// exports.userLogout = (req,res) =>{
-//     const token = jwt.destroy(token);
-// }
 
 exports.updateUsers = (req, res) => {
     const id = req.params.userId;
@@ -286,3 +284,50 @@ exports.updateUsers = (req, res) => {
         }
     );
 }
+
+const logoutUser = async (req, res) => {
+    jwt.signOut()
+      .then(()=>{
+        res.send({
+          message:"successfully signed out"
+        })
+      }).catch((err)=>{
+        res.status(500).send({
+          message:"some error occured"
+        })
+      })
+  }
+  
+  
+//   const loginWithGoogle = async(req,res)=>{
+//     var provider = new firebase.auth.GoogleAuthProvider();
+//     provider.addScope('profile');
+//       provider.addScope('https://www.googleapis.com/');
+//     firebase.auth()
+//     .signInWithPopup(provider)
+//     .then((result) => {
+//       /** @type {firebase.auth.OAuthCredential} */
+//       var credential = result.credential;
+  
+//       // This gives you a Google Access Token. You can use it to access the Google API.
+//       var token = credential.accessToken;
+//       console.log(token)
+//       // The signed-in user info.
+//       var user = result.user;
+//       console.log(user)
+//       // ...
+//     }).catch((error) => {
+//       // Handle Errors here.
+//       var errorCode = error.code;
+//       var errorMessage = error.message;
+//       console.log(errorCode)
+//       console.log(errorMessage)
+//       // The email of the user's account used.
+//       var email = error.email;
+//       // The firebase.auth.AuthCredential type that was used.
+//       var credential = error.credential;
+//       console.log(email)
+//       console.log(credential)
+//       // ...
+//     });
+//   }

@@ -10,7 +10,25 @@ export const ADD_LOCALISATION = "ADD_LOCALISATION";
 export const ADD_PAIEMENT = "ADD_PAIEMENT";
 export const ADD_USERS = "ADD_USERS";
 export const ADD_EMAIL = "ADD_EMAIL";
+export const LOGIN = "LOGIN";
 
+const messageError = (res)=>{
+    const message = document.getElementById("messageErreur")
+    if(res.data.message){
+        if(message.textContent){
+            message.textContent = `${res.data.message}`
+            if(!res.data.validation){
+                message.classList.add("errorMessage")
+            } else message.classList.add("success")
+            
+        }else{
+            message.innerText = `${res.data.message}`
+            if(!res.data.validation){
+                message.classList.add("errorMessage")
+            } else message.classList.add("success")
+        } 
+    }
+}
 
 
 export const addAgents = (data) => {
@@ -116,5 +134,22 @@ export const addUsers = (data) => {
                 payload: data
             });
         }).catch((err) => console.log(err));
+    }
+}
+
+export const SubmitLogin =(data, setRerender)=>{
+    return (dispatch)=>{
+        return axios.post('http://localhost:8000/users/singin',data).then((res)=>{
+            dispatch({ type : LOGIN, payload : data })
+            messageError(res)        
+            if(!res.data.error){
+                // localStorage.setItem("users", res.data.users.role)
+                // localStorage.setItem("noms", res.data.user.noms)
+                localStorage.setItem("token", res.data.token)                
+                localStorage.setItem("permission", true)
+                setRerender(true)
+            }
+        })
+        .catch((error)=> console.log(error))
     }
 }

@@ -18,6 +18,7 @@ exports.createColis = (req,res,next) => {
                         poids: req.body.poids,
                         naturecolis: req.body.naturecolis,
                         codecolis: req.body.codecolis,
+                        id : req.body.id
                     }
                 );
                 newColis.save()

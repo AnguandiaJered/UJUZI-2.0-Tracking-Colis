@@ -13,7 +13,8 @@ exports.createDestination = (req,res,next) => {
                 const newDestination = Destination(
                     {
                         _id: new mongoose.Types.ObjectId,
-                        designation: req.body.designation
+                        designation: req.body.designation,
+                        id : req.body.id
                     }
                 );
                 newDestination.save()

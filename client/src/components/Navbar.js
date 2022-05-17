@@ -13,27 +13,26 @@ const Nav = () => {
 
 
   return (
-    <AppBar position="static" className='navbar-top'>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-          >          
-          
-        </Typography>          
-          <Box sx={{ flexGrow: 0 }} id="setting">
-            <Tooltip title="Open settings">
-              <IconButton >
-                <i className="fa fa-user text-white mt-2"> Jered Anguandia</i>
-                <Logout />
-              </IconButton>             
-            </Tooltip>                       
-          </Box>
-        </Toolbar>
-      </Container>
+    <AppBar position="static" className='navbar-top'>     
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            >           
+          </Typography>          
+            <Box sx={{ flexGrow: 0 }} id="setting">
+              <Tooltip title="Open settings">
+                <IconButton >
+                  <i className="fa fa-user text-white mt-2"> Jered Anguandia</i>
+                  <Logout />
+                </IconButton>             
+              </Tooltip>                       
+            </Box>
+          </Toolbar>
+        </Container>
     </AppBar>
   );
 };

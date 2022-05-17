@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Refresh } from "@material-ui/icons"
 import { useDispatch } from 'react-redux';
 import { addClients } from '../redux/actions/addData';
-import { editClients } from '../redux/actions/editData';
 import { FormControl, Input } from '@mui/material';
 import Alert from '@mui/material/Alert';
-import axios from 'axios';
-import { useParams } from "react-router-dom";
-
+import axios from "axios";
 
 
 const Client = (props) => {
  
     const { client, setEnregistrement } = props
+    console.log(client)
 
     const [loading, setLoading] = useState(false)
     const [data,setData] = useState({
@@ -20,12 +18,19 @@ const Client = (props) => {
         sexe:"",
         adresse:"",
         telephone:"",
-        mail:""
+        mail:"",
+        id : new Date()
       });
       const {noms,sexe,adresse,telephone,mail} = data;
         const handleChange = e =>{
             setData({...data,[e.target.name] : e.target.value});
         }
+
+    useEffect(()=>{
+        if(client){
+            setData({...client})
+        }
+    },[])
 
     const [message, setMessage] = useState({
         title : "", error : ""
@@ -45,23 +50,17 @@ const Client = (props) => {
             setLoading(false)
             
     }
-    const {id}= useParams();
-    // const UpdateClient = (e)=>{
-    //     e.preventDefault()
-    //     dispatch(editClients,data).then((response)=>{
-    //         setMessage({
-    //             title : response.data.message, 
-    //             error : response.data.error
-    //         })
-    //     })
-    //     e.preventDefault();
-    // }
-    const UpdateClient = async (e) =>{
+
+    const UpdateClient = (e)=>{
+        e.preventDefault()
+        axios.put(`http://localhost:8000/client/${client._id}`,data).then((res)=>{
+            setMessage({
+                title : res.data.message, 
+                error : res.data.error
+            })
+        })
         e.preventDefault();
-        await axios.put(`http://localhost:8000/client/${id}`,data).then((res) =>{
-            setData(res.data);
-        });
-    };
+    }
 
     return(
         <div className="container-fluid">
@@ -76,13 +75,14 @@ const Client = (props) => {
                         <div className='form-group'>              
                             <Input type="text" placeholder= "Entrer les noms" 
                             className='form-control' 
-                            name='noms'  defaultValue={client ? client.noms : noms}
+                            name='noms'  
+                            value={noms}
                             onChange={e => handleChange(e)} required/>
                         </div>
                         <div className='form-group'>                  
                             <select className='form-control' 
                             name='sexe' 
-                            defaultValue={client ? client.sexe : sexe} 
+                            value={sexe} 
                             onChange={e => handleChange(e)}> 
                                 <option value="">None</option>
                                 <option value='M'>M</option>
@@ -92,7 +92,8 @@ const Client = (props) => {
                         <div className='form-group'>                 
                             <Input type="text" placeholder='Adresse' 
                             className='form-control' 
-                            name='adresse' defaultValue={client ? client.adresse : adresse} 
+                            name='adresse' 
+                            value={adresse} 
                             onChange={e => handleChange(e)} required/>
                         </div>
                     </div>
@@ -100,13 +101,15 @@ const Client = (props) => {
                         <div className='form-group'>                   
                             <Input type="tel" placeholder='+243...' 
                             className='form-control' 
-                            name='telephone' defaultValue={client ? client.telephone : telephone} 
+                            name='telephone' 
+                            value={telephone} 
                             onChange={e => handleChange(e)} required/>
                         </div>
                         <div className='form-group'>                   
                             <Input type="email" placeholder='Email...' 
                             className='form-control' 
-                            name='mail' defaultValue={client ? client.mail : mail}
+                            name='mail' 
+                            value={mail}
                             onChange={e => handleChange(e)} required/>
                         </div>
                     </div>
@@ -117,7 +120,7 @@ const Client = (props) => {
                         {loading && <Refresh/>} Enregistrer </button> 
                     }
                     {
-                        client && <button className="btn btn-success boutton-classe" onClick={()=> UpdateClient(client._id)}>Modifier</button>
+                        client && <button className="btn btn-success boutton-classe" onClick={(e)=> UpdateClient(e)}>Modifier</button>
                     }
                 </FormControl>
           </form>

@@ -15,7 +15,7 @@ const nodemailer = require('nodemailer');
 // client roots
 router.post('/client/create', client.createClient);
 router.get('/client/all',client.findClient);
-router.get('/client/single/:clientId',client.findClient);
+router.get('/client/single/:clientId',checkAut,client.findClient);
 router.put('/client/:clientId',client.updateClient);
 router.delete('/client/:clientId',client.deleteclient);
 
@@ -27,11 +27,11 @@ router.put('/colis/:colisId',checkAut,colis.updateColis);
 router.delete('/colis/:colisId',checkAut,colis.deleteColis);
 
 // destination roots
-router.post('/destination/create', checkAut,destination.createDestination);
+router.post('/destination/create', destination.createDestination);
 router.get('/destination/all',destination.findDestination);
 router.get('/destination/single/:destinationId',checkAut,destination.getSingleDestination);
-router.put('/destination/:destinationId',checkAut,destination.updateDestination);
-router.delete('/destination/:destinationId',checkAut,destination.deleteDestination);
+router.put('/destination/:destinationId',destination.updateDestination);
+router.delete('/destination/:destinationId',destination.deleteDestination);
 
 // agent roots
 router.post('/agent/create', checkAut,agent.createAgent);
@@ -66,7 +66,7 @@ router.put('/paiement/:paiementId', checkAut,paiement.updatePaiement);
 router.delete('/paiement/:paiementId', checkAut,paiement.deletePaiement);
 
 // localisation roots
-router.post('/localisation/create', checkAut,localisation.createLocalisation);
+router.post('/localisation/create', localisation.createLocalisation);
 router.get('/localisation/all', localisation.findLocalisation);
 router.get('/localisation/single/:localisationId', checkAut,localisation.getSingleLocalisation);
 router.put('/localisation/:localisationId', checkAut,localisation.updateLocalisation);

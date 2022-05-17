@@ -21,6 +21,7 @@ exports.createAgent = (req,res,next) => {
                         telephone: req.body.telephone,
                         mail: req.body.mail,
                         fonction: req.body.fonction,
+                        id : req.body.id
                     }
                 );
                 newAgent.save()

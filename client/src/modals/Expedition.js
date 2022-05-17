@@ -1,8 +1,7 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Refresh } from "@material-ui/icons"
 import { useDispatch } from 'react-redux';
 import { addExpedition } from '../redux/actions/addData';
-import { editExpedition } from '../redux/actions/editData';
 import { FormControl, Input } from '@mui/material';
 import axios from "axios";
 import Alert from '@mui/material/Alert';
@@ -24,12 +23,20 @@ const Expedition = (props) => {
         mail:"",
         heuredepart:"",
         heurearrivee:"",
-        author:""
+        author:"",
+        id : new Date()
       });
       const {client,colis,destination,dateExpedition,nomsclient,adresse,telephone,mail,heuredepart,heurearrivee,author} = data;
-        const handleChange = e =>{
+        
+      const handleChange = e =>{
             setData({...data,[e.target.name] : e.target.value});
         }
+      
+        useEffect(()=>{
+          if(expedition){
+              setData({...expedition})
+          }
+      },[])
 
     const [message, setMessage] = useState({
         title : "", error : ""
@@ -51,15 +58,16 @@ const Expedition = (props) => {
     }
   
     const UpdateExpedition = (e)=>{
-        e.preventDefault()
-        dispatch(editExpedition,data).then((response)=>{
-            setMessage({
-                title : response.data.message, 
-                error : response.data.error
-            })
-        })
-        e.preventDefault();
-    }
+      e.preventDefault()
+      axios.put(`http://localhost:8000/expedition/${expedition._id}`,data).then((res)=>{
+          setMessage({
+              title : res.data.message, 
+              error : res.data.error
+          })
+      })
+      e.preventDefault();
+  }
+
     const [rows, setRows] = useState([])
     const [colise, setColise] = useState([]);
     const [destine, setDestine] = useState([]);
@@ -104,7 +112,7 @@ const Expedition = (props) => {
                 <div className='form-group'>                  
                    <select className='form-control' 
                    name='client' 
-                 defaultValue={expedition ? expedition.client : client} 
+                  value={client} 
                   onChange={e => handleChange(e)}> 
                     <option value="">None</option> 
                     {
@@ -116,7 +124,7 @@ const Expedition = (props) => {
                 <div className='form-group'>                  
                    <select className='form-control' 
                    name='colis' 
-                  defaultValue={expedition ? expedition.colis : colis}
+                  value={colis}
                   onChange={e => handleChange(e)}> 
                       <option value="">None</option>
                      {
@@ -128,7 +136,7 @@ const Expedition = (props) => {
                 <div className='form-group'>                  
                    <select className='form-control' 
                    name='destination' 
-                  defaultValue={expedition ? expedition.destination : destination} 
+                  value={destination} 
                   onChange={e => handleChange(e)}>
                      <option value="">None</option>
                      {
@@ -141,21 +149,21 @@ const Expedition = (props) => {
                   <Input type="date" 
                   className='form-control' 
                   name='dateExpedition' 
-                  defaultValue={expedition ? expedition.dateExpedition : dateExpedition} 
+                  value={dateExpedition} 
                   onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                    
                     <Input type="text" placeholder="Entrer les noms"
                     className='form-control' 
                     name='nomsclient' 
-                    defaultValue={expedition ? expedition.nomsclient : nomsclient} 
+                    value={nomsclient}
                     onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                    
                     <Input type="text" placeholder='Adresse' 
                     className='form-control' 
                     name='adresse' 
-                    defaultValue={expedition ? expedition.adresse : adresse} 
+                    value={adresse}
                     onChange={e => handleChange(e)} required/>
                 </div>
               </div>
@@ -164,34 +172,34 @@ const Expedition = (props) => {
                     <Input type="tel" placeholder='+243...' 
                     className='form-control' 
                     name='telephone' 
-                    defaultValue={expedition ? expedition.telephone : telephone} 
+                    value={telephone} 
                     onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                    
                     <Input type="email" placeholder='Email' 
                     className='form-control' 
                     name='mail' 
-                    defaultValue={expedition ? expedition.mail : mail} 
+                    value={mail}
                     onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                    
                     <Input type="text" placeholder='heure de depart' 
                     className='form-control' 
                     name='heuredepart' 
-                    defaultValue={expedition ? expedition.heuredepart : heuredepart} 
+                    value={heuredepart} 
                     onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                    
                     <Input type="text" placeholder='heure arrivée' 
                     className='form-control' 
                     name='heurearrivee' 
-                    defaultValue={expedition ? expedition.heurearrivee : heurearrivee} 
+                    value={heurearrivee} 
                     onChange={e => handleChange(e)} required/>
                 </div>
                 <div className='form-group'>                  
                    <select className='form-control' 
                    name='author' 
-                  defaultValue={expedition ? expedition.author : author} 
+                  value={author} 
                   onChange={e => handleChange(e)}>
                      <option value="">None</option>
                      {
