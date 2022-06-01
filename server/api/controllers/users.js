@@ -285,6 +285,7 @@ exports.updateUsers = (req, res) => {
     );
 }
 
+
 const logoutUser = async (req, res) => {
     jwt.signOut()
       .then(()=>{

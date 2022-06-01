@@ -26,40 +26,40 @@ const Users = (props) => {
             setData({...data,[e.target.name] : e.target.value});
         }
 
-      useEffect(()=>{
+        useEffect(()=>{
           if(users){
-              setData({...users})
+            setData({...users})
           }
-      },[])
+        },[])
 
     const [message, setMessage] = useState({
         title : "", error : ""
     });
     const dispatch = useDispatch()
     const onSubmitUsers = async (event)=>{
-        event.preventDefault()   
-        setLoading(true)
-            await dispatch(addUsers(data)
-                ).then(res=>{
-                    setEnregistrement(res.data.message)
-                    setMessage({
-                        title : res.data.message, 
-                        error : res.data.error
-                    })
-                })
-            setLoading(false)           
-    }
-
-    const UpdateUsers = (e)=>{
-      e.preventDefault()
-      axios.put(`http://localhost:8000/users/${users._id}`,data).then((res)=>{
-          setMessage({
-              title : res.data.message, 
-              error : res.data.error
-          })
-      })
-      e.preventDefault();
+      event.preventDefault()   
+      setLoading(true)
+          await dispatch(addUsers(data)
+              ).then(res=>{
+                  setEnregistrement(res.data.message)
+                  setMessage({
+                      title : res.data.message, 
+                      error : res.data.error
+                  })
+              })
+          setLoading(false)        
   }
+
+  const UpdateUsers = (e)=>{
+    e.preventDefault()
+    axios.put(`http://localhost:8000/users/${users.id}`,data).then((res)=>{
+        setMessage({
+            title : res.data.message, 
+            error : res.data.error
+        })
+    })
+    e.preventDefault();
+}
     
     return(
         <div className="container-fluid">           

@@ -34,9 +34,9 @@ export const Utilisateur = () =>{
               <span style={{marginLeft:"15px", cursor:"pointer"}} onClick={(e)=>{
                 setDataToSave(params.row)
                 openPopupUsers(true)
-              }}><span style={{marginLeft:"30px", cursor:"pointer"}} onClick={()=> Modification(params.row)}><Edit color="primary"/> Modifier</span></span>              
-              <button className='btn' onClick={()=> deleteUsers(params.row._id)}><DeleteIcon color="secondary"/>Supprimer</button>
-            </>
+              }}><span style={{marginLeft:"30px", cursor:"pointer"}} onClick={()=> Modification(params.row)}><Edit color="primary"/> Modifier</span></span>
+              <button className='btn' onClick={()=> deleteUsers(params.row.id)}><DeleteIcon color="secondary"/>Supprimer</button>
+              </>
           )
         }
       },
@@ -52,6 +52,7 @@ export const Utilisateur = () =>{
       })
     },[enregistrement])
     console.log(rows)
+
     const deleteUsers = async (id) =>{
       await axios.delete(`http://localhost:8000/users/${id}`)
         .then((res)=>{
@@ -84,7 +85,7 @@ export const Utilisateur = () =>{
                     </h1>
                     <div className="container-fluid">
                         <ol className="breadcrumb">
-                            <li className="active"><i className="fa fa-dashboard"></i> Dashboard / Clients</li>
+                            <li className="active"><i className="fa fa-dashboard"></i> Dashboard / Users</li>
                         </ol>
                     </div>                            
                 </div>

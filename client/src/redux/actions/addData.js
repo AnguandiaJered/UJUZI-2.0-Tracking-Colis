@@ -128,7 +128,7 @@ export const addPaiement = (data) => {
 
 export const addUsers = (data) => {
     return (dispatch) => {
-        return axios.post('http://localhost:8000/users/create', data).then(res => {
+        return axios.post('http://localhost:8000/users/signup', data).then(res => {
             dispatch({
                 type: ADD_USERS,
                 payload: data

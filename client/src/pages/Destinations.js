@@ -83,7 +83,7 @@ export const Destinations = () =>{
                     </h1>
                     <div className="container-fluid">
                         <ol className="breadcrumb">
-                            <li className="active"><i className="fa fa-dashboard"></i> Dashboard / Destination</li>
+                            <li className="active"><i className="fa fa-dashboard"></i> Dashboard / Destinations</li>
                         </ol>
                     </div>                            
                 </div>

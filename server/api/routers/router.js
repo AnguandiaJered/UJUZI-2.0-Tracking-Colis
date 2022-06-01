@@ -20,11 +20,11 @@ router.put('/client/:clientId',client.updateClient);
 router.delete('/client/:clientId',client.deleteclient);
 
 // colis roots
-router.post('/colis/create', checkAut,colis.createColis);
+router.post('/colis/create', colis.createColis);
 router.get('/colis/all',colis.findColis);
 router.get('/colis/single/:colisId',checkAut,colis.findColis);
-router.put('/colis/:colisId',checkAut,colis.updateColis);
-router.delete('/colis/:colisId',checkAut,colis.deleteColis);
+router.put('/colis/:colisId',colis.updateColis);
+router.delete('/colis/:colisId',colis.deleteColis);
 
 // destination roots
 router.post('/destination/create', destination.createDestination);
@@ -34,36 +34,36 @@ router.put('/destination/:destinationId',destination.updateDestination);
 router.delete('/destination/:destinationId',destination.deleteDestination);
 
 // agent roots
-router.post('/agent/create', checkAut,agent.createAgent);
+router.post('/agent/create', agent.createAgent);
 router.get('/agent/all',agent.findAgent);
 router.get('/agent/single/:agentId',checkAut,agent.getSingleAgent);
-router.put('/agent/:agentId',checkAut,agent.updateAgent);
-router.delete('/agent/:agentId',checkAut,agent.deleteAgent);
+router.put('/agent/:agentId',agent.updateAgent);
+router.delete('/agent/:agentId',agent.deleteAgent);
 
 // users roots
-router.post('/users/signup', checkAut,users.creatUsers);
+router.post('/users/signup', users.creatUsers);
 router.get('/users/all', users.findUsers);
-router.get('/users/single/:userId', checkAut,users.getSingleUsers);
-router.delete('/users/:userId',checkAut,users.deleteUsers);
-router.put('/users/:userId',checkAut,users.updateUsers);
+router.get('/users/single/:userId', users.getSingleUsers);
+router.delete('/users/:userId',users.deleteUsers);
+router.put('/users/:userId',users.updateUsers);
 
 // login root
 router.post('/users/singin', users.userLogin);
 // router.get('/users/logout', checkAut,users.userLogout);
 
 // Expedition routes
-router.post('/expedition/create',checkAut,expedition.createExpedition);
+router.post('/expedition/create',expedition.createExpedition);
 router.get('/expedition/all',expedition.findExpedition);
-router.get('/expedition/single/:expeditionId',checkAut,expedition.getSingleExpedition);
-router.put('/expedition/:expeditionId',checkAut,expedition.updateExpedition);
-router.delete('/expedition/:expeditionId',checkAut,expedition.deleteExpedition);
+router.get('/expedition/single/:expeditionId',expedition.getSingleExpedition);
+router.put('/expedition/:expeditionId',expedition.updateExpedition);
+router.delete('/expedition/:expeditionId',expedition.deleteExpedition);
 
 // paiement routes
-router.post('/paiement/create', checkAut,paiement.createPaiement);
+router.post('/paiement/create', paiement.createPaiement);
 router.get('/paiement/all',paiement.findPaiement);
 router.get('/paiement/single/:paiementId', checkAut,paiement.getSinglePaiement);
-router.put('/paiement/:paiementId', checkAut,paiement.updatePaiement);
-router.delete('/paiement/:paiementId', checkAut,paiement.deletePaiement);
+router.put('/paiement/:paiementId', paiement.updatePaiement);
+router.delete('/paiement/:paiementId', paiement.deletePaiement);
 
 // localisation roots
 router.post('/localisation/create', localisation.createLocalisation);
@@ -72,7 +72,7 @@ router.get('/localisation/single/:localisationId', checkAut,localisation.getSing
 router.put('/localisation/:localisationId', checkAut,localisation.updateLocalisation);
 router.delete('/localisation/:localisationId', checkAut,localisation.deleteLocalisation);
 
-router.post('/message',checkAut, (req,res) => {
+router.post('/message', (req,res) => {
     const data = req.body;
     const transporter = nodemailer.createTransport({
         service:'gmail',
