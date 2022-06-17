@@ -44,7 +44,7 @@ export const Destinations = () =>{
     const [rows, setRows] = useState([])
     const [enregistrement, setEnregistrement] = useState()
     useEffect( async()=>{
-      await axios.get('http://localhost:8000/destination/all')
+      await axios.get('http://localhost:8000/destination')
       .then(res =>{
         setRows(res.data.destination)
       })

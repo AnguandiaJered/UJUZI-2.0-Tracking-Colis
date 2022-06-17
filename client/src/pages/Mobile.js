@@ -6,12 +6,12 @@ import AddIcon from "@material-ui/icons/Add";
 import { isEmpty } from "./Utils";
 import Popup from './Popup';
 import axios from 'axios';
-import Paiement from "../modals/Paiement";
+import Mobile from "../modals/Mobile";
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-export const Paiements = () =>{
-    const [openPopupPaiement, setOpenPopupPaiement] = useState(false)
+export const Mobiles = () =>{
+    const [openPopupMobile, setOpenPopupMobile] = useState(false)
     const [dataToSave, setDataToSave] = useState()
   
     const [openPopupModification, setOpenPopupModification] = useState(false)
@@ -22,23 +22,20 @@ export const Paiements = () =>{
       setOpenPopupModification(true)
     }
 
-    const columns = [
-     
-        { field: 'client', headerName: 'Client', width: 170, editable: true },
-        { field: 'colis', headerName: 'Colis', width: 150, editable: true },
-        { field: 'montant', headerName: 'Montant', width: 100, editable: true },
-        { field: 'libelle', headerName: 'Libelle', width: 250, editable: true },
-        { field: 'datepaiement', headerName: 'Date paiement', width: 150, editable: true },
-        { field: 'author', headerName: 'Author', width: 150, editable: true },
+    const columns = [     
+        { field: 'matricule', headerName: 'Matricules', width: 200, editable: true },
+        { field: 'modele', headerName: 'Modeles', width: 230, editable: true },
+        { field: 'marque', headerName: 'Marques', width: 350, editable: true },
+        { field: 'moteur', headerName: 'Moteurs', width: 120, editable: true },
         { field: 'Action', headerName: 'Actions', width: 260, editable: true,
         renderCell : (params)=>{
           return(
             <>
               <span style={{marginLeft:"15px", cursor:"pointer"}} onClick={(e)=>{
                 setDataToSave(params.row)
-                openPopupPaiement(true)
-              }}><span style={{marginLeft:"30px", cursor:"pointer"}} onClick={()=> Modification(params.row)}><Edit color="primary"/> Modifier</span></span>              
-              <button className='btn' onClick={()=> deletePaiement(params.row._id)}><DeleteIcon color="secondary"/>Supprimer</button>
+                openPopupMobile(true)
+              }}><span style={{marginLeft:"30px", cursor:"pointer"}} onClick={()=> Modification(params.row)}><Edit color="primary"/> Modifier</span></span>
+              <button className='btn' onClick={()=> deleteMobile(params.row._id)}><DeleteIcon color="secondary"/>Supprimer</button>
               </>
           )
         }
@@ -48,15 +45,16 @@ export const Paiements = () =>{
     const [openPopupForm, setOpenPopupForm] = useState(false)
     const [rows, setRows] = useState([])
     const [enregistrement, setEnregistrement] = useState()
-    useEffect(async()=>{
-     await axios.get('http://localhost:8000/paiement')
+    useEffect(()=>{
+      axios.get('http://localhost:8000/mobile')
       .then(res =>{
-        setRows(res.data.paiement)
+        setRows(res.data.mobile)
       })
     },[enregistrement])
     console.log(rows)
-    const deletePaiement = async (id) =>{
-      await axios.delete(`http://localhost:8000/paiement/${id}`)
+
+    const deleteMobile = async (id) =>{
+      await axios.delete(`http://localhost:8000/mobile/${id}`)
         .then((res)=>{
           setRows(res.data);
         })        
@@ -70,7 +68,7 @@ export const Paiements = () =>{
           if(target.value === ""){
             return items
           }else{
-            return items.filter(x=> x.montant.includes(target.value))
+            return items.filter(x=> x.matricule.includes(target.value))
           }
           }
         })
@@ -87,7 +85,7 @@ export const Paiements = () =>{
                     </h1>
                     <div className="container-fluid">
                         <ol className="breadcrumb">
-                            <li className="active"><i className="fa fa-dashboard"></i> Dashboard / Paiements</li>
+                            <li className="active"><i className="fa fa-dashboard"></i> Dashboard / Mobiles</li>
                         </ol>
                     </div>                            
                 </div>
@@ -124,26 +122,26 @@ export const Paiements = () =>{
              </div>
         }
         <Popup
-            title="Entrer les informations actuelles de paiement"
+            title="Entrer les informations actuelles du mobile"
             openPopup={openPopupModification}
             setOpenPopup={setOpenPopupModification}
             >  
-                <Paiement paiement={dataModi} />
+                <Mobile mobile={dataModi} />
         </Popup>
         <Popup
         title={`Ajout de ${dataToSave && dataToSave.noms}`}
-        openPopup={openPopupPaiement}
-        setOpenPopup={setOpenPopupPaiement}
+        openPopup={openPopupMobile}
+        setOpenPopup={setOpenPopupMobile}
         >  
-            <Paiement data={dataToSave}/>
+            <Mobile data={dataToSave}/>
         </Popup>
     
         <Popup
-        title="Enregistrement des paiements"
+        title="Enregistrement des mobiles"
         openPopup={openPopupForm}
         setOpenPopup={setOpenPopupForm}
         >  
-            <Paiement paiement={undefined} setEnregistrement={setEnregistrement}/>
+            <Mobile mobile={undefined} setEnregistrement={setEnregistrement}/>
         </Popup>    
          
     </div>

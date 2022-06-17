@@ -8,41 +8,42 @@ const destination = require('../controllers/destination');
 const agent = require('../controllers/agent');
 const expedition = require('../controllers/expedition');
 const paiement = require('../controllers/paiement');
-const localisation = require('../controllers/localisation');
+// const localisation = require('../controllers/localisation');
+const mobile = require('../controllers/mobile');
 const nodemailer = require('nodemailer');
 
 
 // client roots
-router.post('/client/create', client.createClient);
-router.get('/client/all',client.findClient);
+router.post('/client', client.createClient);
+router.get('/client',client.findClient);
 router.get('/client/single/:clientId',checkAut,client.findClient);
 router.put('/client/:clientId',client.updateClient);
 router.delete('/client/:clientId',client.deleteclient);
 
 // colis roots
-router.post('/colis/create', colis.createColis);
-router.get('/colis/all',colis.findColis);
+router.post('/colis', colis.createColis);
+router.get('/colis',colis.findColis);
 router.get('/colis/single/:colisId',checkAut,colis.findColis);
 router.put('/colis/:colisId',colis.updateColis);
 router.delete('/colis/:colisId',colis.deleteColis);
 
 // destination roots
-router.post('/destination/create', destination.createDestination);
-router.get('/destination/all',destination.findDestination);
+router.post('/destination', destination.createDestination);
+router.get('/destination',destination.findDestination);
 router.get('/destination/single/:destinationId',checkAut,destination.getSingleDestination);
 router.put('/destination/:destinationId',destination.updateDestination);
 router.delete('/destination/:destinationId',destination.deleteDestination);
 
 // agent roots
-router.post('/agent/create', agent.createAgent);
-router.get('/agent/all',agent.findAgent);
+router.post('/agent', agent.createAgent);
+router.get('/agent',agent.findAgent);
 router.get('/agent/single/:agentId',checkAut,agent.getSingleAgent);
 router.put('/agent/:agentId',agent.updateAgent);
 router.delete('/agent/:agentId',agent.deleteAgent);
 
 // users roots
 router.post('/users/signup', users.creatUsers);
-router.get('/users/all', users.findUsers);
+router.get('/users', users.findUsers);
 router.get('/users/single/:userId', users.getSingleUsers);
 router.delete('/users/:userId',users.deleteUsers);
 router.put('/users/:userId',users.updateUsers);
@@ -52,25 +53,32 @@ router.post('/users/singin', users.userLogin);
 // router.get('/users/logout', checkAut,users.userLogout);
 
 // Expedition routes
-router.post('/expedition/create',expedition.createExpedition);
-router.get('/expedition/all',expedition.findExpedition);
+router.post('/expedition',expedition.createExpedition);
+router.get('/expedition',expedition.findExpedition);
 router.get('/expedition/single/:expeditionId',expedition.getSingleExpedition);
 router.put('/expedition/:expeditionId',expedition.updateExpedition);
 router.delete('/expedition/:expeditionId',expedition.deleteExpedition);
 
 // paiement routes
-router.post('/paiement/create', paiement.createPaiement);
-router.get('/paiement/all',paiement.findPaiement);
+router.post('/paiement', paiement.createPaiement);
+router.get('/paiement',paiement.findPaiement);
 router.get('/paiement/single/:paiementId', checkAut,paiement.getSinglePaiement);
 router.put('/paiement/:paiementId', paiement.updatePaiement);
 router.delete('/paiement/:paiementId', paiement.deletePaiement);
 
 // localisation roots
-router.post('/localisation/create', localisation.createLocalisation);
-router.get('/localisation/all', localisation.findLocalisation);
-router.get('/localisation/single/:localisationId', checkAut,localisation.getSingleLocalisation);
-router.put('/localisation/:localisationId', checkAut,localisation.updateLocalisation);
-router.delete('/localisation/:localisationId', checkAut,localisation.deleteLocalisation);
+// router.post('/localisation', localisation.createLocalisation);
+// router.get('/localisation', localisation.findLocalisation);
+// router.get('/localisation/single/:localisationId', checkAut,localisation.getSingleLocalisation);
+// router.put('/localisation/:localisationId', checkAut,localisation.updateLocalisation);
+// router.delete('/localisation/:localisationId', checkAut,localisation.deleteLocalisation);
+
+// mobile roots
+router.post('/mobile', mobile.createMobile);
+router.get('/mobile', mobile.findMobile);
+router.get('/mobile/single/:mobileId', checkAut,mobile.getSingleMobile);
+router.put('/mobile/:mobileId', mobile.updateMobile);
+router.delete('/mobile/:mobileId', mobile.deleteMobile);
 
 router.post('/message', (req,res) => {
     const data = req.body;

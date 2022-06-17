@@ -46,7 +46,7 @@ export const Utilisateur = () =>{
     const [rows, setRows] = useState([])
     const [enregistrement, setEnregistrement] = useState()
     useEffect(()=>{
-      axios.get('http://localhost:8000/users/all')
+      axios.get('http://localhost:8000/users')
       .then(res =>{
         setRows(res.data.users)
       })

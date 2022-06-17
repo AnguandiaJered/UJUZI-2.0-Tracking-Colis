@@ -10,6 +10,7 @@ export const ADD_LOCALISATION = "ADD_LOCALISATION";
 export const ADD_PAIEMENT = "ADD_PAIEMENT";
 export const ADD_USERS = "ADD_USERS";
 export const ADD_EMAIL = "ADD_EMAIL";
+export const ADD_MOBILE = "ADD_MOBILE";
 export const LOGIN = "LOGIN";
 
 const messageError = (res)=>{
@@ -33,7 +34,7 @@ const messageError = (res)=>{
 
 export const addAgents = (data) => {
     return (dispatch) => {
-        return axios.post('http://localhost:8000/agent/create', data).then(res => {
+        return axios.post('http://localhost:8000/agent', data).then(res => {
             dispatch({
                 type: ADD_AGENTS,
                 payload: data
@@ -44,7 +45,7 @@ export const addAgents = (data) => {
 
 export const addClients = (data) => {
     return (dispatch) => {
-        return axios.post('http://localhost:8000/client/create', data).then(res => {
+        return axios.post('http://localhost:8000/client', data).then(res => {
             dispatch({
                 type: ADD_CLIENTS,
                 payload: data
@@ -56,7 +57,7 @@ export const addClients = (data) => {
 
 export const addColis = (data) => {
     return (dispatch) => {
-        return axios.post('http://localhost:8000/colis/create', data).then(res => {
+        return axios.post('http://localhost:8000/colis', data).then(res => {
             dispatch({
                 type: ADD_COLIS,
                 payload: data
@@ -68,7 +69,7 @@ export const addColis = (data) => {
 
 export const addDestination = (data) => {
     return (dispatch) => {
-        return axios.post('http://localhost:8000/destination/create', data).then(res => {
+        return axios.post('http://localhost:8000/destination', data).then(res => {
             dispatch({
                 type: ADD_DESTINATION,
                 payload: data
@@ -78,13 +79,14 @@ export const addDestination = (data) => {
 }
 
 
-export const addExpedition = (data) => {
+export const addExpedition = (data) => {    
     return (dispatch) => {
-        return axios.post('http://localhost:8000/expedition/create', data).then(res => {
+        return axios.post('http://localhost:8000/expedition', data).then(res => {            
             dispatch({
                 type: ADD_EXPEDITION,
                 payload: data
             });
+            return res;
         }).catch((err) => console.log(err));
     }
 }
@@ -92,7 +94,7 @@ export const addExpedition = (data) => {
 
 export const addLocalisation = (data) => {
     return (dispatch) => {
-        return axios.post('http://localhost:8000/localisation/create', data).then(res => {
+        return axios.post('http://localhost:8000/localisation', data).then(res => {
             dispatch({
                 type: ADD_LOCALISATION,
                 payload: data
@@ -116,7 +118,7 @@ export const addEmails = (data) => {
 
 export const addPaiement = (data) => {
     return (dispatch) => {
-        return axios.post('http://localhost:8000/paiement/create', data).then(res => {
+        return axios.post('http://localhost:8000/paiement', data).then(res => {
             dispatch({
                 type: ADD_PAIEMENT,
                 payload: data
@@ -136,6 +138,19 @@ export const addUsers = (data) => {
         }).catch((err) => console.log(err));
     }
 }
+
+
+export const addMobile = (data) => {
+    return (dispatch) => {
+        return axios.post('http://localhost:8000/mobile', data).then(res => {
+            dispatch({
+                type: ADD_MOBILE,
+                payload: data
+            });
+        }).catch((err) => console.log(err));
+    }
+}
+
 
 export const SubmitLogin =(data, setRerender)=>{
     return (dispatch)=>{

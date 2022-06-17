@@ -6,7 +6,7 @@ const Paiement = require('../models/paiement');
 
 exports.createPaiement = (req, res) => {
     
-    Paiement.find({ _id: req.body.id})
+    Paiement.find({ _id: req.body._id})
     .then(
         (result) => {
             if (result.length > 0) {

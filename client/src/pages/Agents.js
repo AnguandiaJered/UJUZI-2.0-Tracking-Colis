@@ -50,7 +50,7 @@ export const Agents = () =>{
     const [rows, setRows] = useState([])
     const [enregistrement, setEnregistrement] = useState()
     useEffect(()=>{
-      axios.get('http://localhost:8000/agent/all')
+      axios.get('http://localhost:8000/agent')
       .then(res =>{
         setRows(res.data.agent)
       })

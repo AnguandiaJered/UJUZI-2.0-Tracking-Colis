@@ -6,7 +6,7 @@ const Expedition = require('../models/expedition');
 
 exports.createExpedition = (req, res) => {
     
-    Expedition.find({ _id: req.body.id})
+    Expedition.find({ _id: req.body._id})
     .then(
         (result) => {
             if (result.length > 0) {
@@ -26,6 +26,7 @@ exports.createExpedition = (req, res) => {
                     mail: req.body.mail,
                     heuredepart: req.body.heuredepart,
                     heurearrivee: req.body.heurearrivee,                                                       
+                    mobile: req.body.mobile,                                                       
                     author: req.body.author,
                     id : req.body.id                                                      
                 });
@@ -44,6 +45,7 @@ exports.createExpedition = (req, res) => {
                             mail: expedition.mail,
                             heuredepart: expedition.heuredepart,
                             heurearrivee: expedition.heurearrivee,                           
+                            mobile: expedition.mobile,                           
                             author: expedition.author,                           
                         };
                         return res.status(200).json({
@@ -130,6 +132,7 @@ exports.updateExpedition = (req, res) => {
                     mail: req.body.mail,
                     heuredepart: req.body.heuredepart,
                     heurearrivee: req.body.heurearrivee,   
+                    mobile: req.body.mobile,   
                     author: req.body.author,   
                 }
             );

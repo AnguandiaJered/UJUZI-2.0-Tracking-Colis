@@ -4,7 +4,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonIcon from '@mui/icons-material/Person';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import AttachEmailIcon from '@mui/icons-material/AttachEmail';
-// import ShareLocationIcon from '@mui/icons-material/ShareLocation';
+import ShareLocationIcon from '@mui/icons-material/ShareLocation';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import StadiumIcon from '@mui/icons-material/Stadium';
@@ -36,11 +36,11 @@ export const SidebarData = [
         path: "/expedition",
         icon: <FaxIcon />,
     },
-    // {
-    //     title: "Localisation",
-    //     path: "/localisation",
-    //     icon: <ShareLocationIcon />,
-    // } , 
+    {
+        title: "Mobiles",
+        path: "/mobile",
+        icon: <ShareLocationIcon />,
+    } , 
     {
         title: "Paiements",
         path: "/paiement",

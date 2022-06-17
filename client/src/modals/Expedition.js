@@ -23,10 +23,11 @@ const Expedition = (props) => {
         mail:"",
         heuredepart:"",
         heurearrivee:"",
+        mobile:"",
         author:"",
         id : new Date()
       });
-      const {client,colis,destination,dateExpedition,nomsclient,adresse,telephone,mail,heuredepart,heurearrivee,author} = data;
+      const {client,colis,destination,dateExpedition,nomsclient,adresse,telephone,mail,heuredepart,heurearrivee,mobile,author} = data;
         
       const handleChange = e =>{
             setData({...data,[e.target.name] : e.target.value});
@@ -72,32 +73,39 @@ const Expedition = (props) => {
     const [colise, setColise] = useState([]);
     const [destine, setDestine] = useState([]);
     const [person, setPerson] = useState([]);
+    const [mobiles, setMobile] = useState([]);
     useEffect(()=>{
-      axios.get('http://localhost:8000/client/all')
+      axios.get('http://localhost:8000/client')
       .then(res =>{
         setRows(res.data.client)
       })
-    },[rows])
+    },[])
 
     console.log(rows)
     useEffect(()=>{
-      axios.get('http://localhost:8000/colis/all')
+      axios.get('http://localhost:8000/colis')
       .then(res =>{
         setColise(res.data.colis)
       })
-    },[colise])
+    },[])
     useEffect(()=>{
-      axios.get('http://localhost:8000/destination/all')
+      axios.get('http://localhost:8000/destination')
       .then(res =>{
         setDestine(res.data.destination)
       })
-    },[destine])
+    },[])
     useEffect(()=>{
-      axios.get('http://localhost:8000/agent/all')
+      axios.get('http://localhost:8000/agent')
       .then(res =>{
         setPerson(res.data.agent)
       })
-    },[person])
+    },[])
+    useEffect(()=>{
+      axios.get('http://localhost:8000/mobile')
+      .then(res =>{
+        setMobile(res.data.mobile)
+      })
+    },[])
     
     return(
         <div className="container-fluid">
@@ -195,6 +203,18 @@ const Expedition = (props) => {
                     name='heurearrivee' 
                     value={heurearrivee} 
                     onChange={e => handleChange(e)} required/>
+                </div>
+                <div className='form-group'>                  
+                   <select className='form-control' 
+                   name='mobile' 
+                  value={mobile} 
+                  onChange={e => handleChange(e)}>
+                     <option value="">None</option>
+                     {
+                        mobiles.map((item => (<option key={item.id}  value={item.matricule}>{item.matricule}</option>))
+                        )
+                    }                     
+                   </select>               
                 </div>
                 <div className='form-group'>                  
                    <select className='form-control' 

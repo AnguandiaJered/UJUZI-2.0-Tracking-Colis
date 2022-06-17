@@ -1,34 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { Refresh } from "@material-ui/icons"
 import { useDispatch } from 'react-redux';
-import { addClients } from '../redux/actions/addData';
+import { addMobile } from '../redux/actions/addData';
 import { FormControl, Input } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import axios from "axios";
 
 
-const Client = (props) => {
+const Mobile = (props) => {
  
-    const { client, setEnregistrement } = props
-    console.log(client)
+    const { mobile, setEnregistrement } = props
+    console.log(mobile)
 
     const [loading, setLoading] = useState(false)
     const [data,setData] = useState({
-        noms:"",
-        sexe:"",
-        adresse:"",
-        telephone:"",
-        mail:"",
+        matricule:"",
+        modele:"",
+        marque:"",
+        moteur:"",
         id : new Date()
       });
-      const {noms,sexe,adresse,telephone,mail} = data;
+      const {matricule,modele,marque,moteur} = data;
         const handleChange = e =>{
             setData({...data,[e.target.name] : e.target.value});
         }
 
     useEffect(()=>{
-        if(client){
-            setData({...client})
+        if(mobile){
+            setData({...mobile})
         }
     },[])
 
@@ -36,10 +35,10 @@ const Client = (props) => {
         title : "", error : ""
     });
     const dispatch = useDispatch()
-    const onSubmitClient = async (event)=>{
+    const onSubmitMobile = async (event)=>{
         event.preventDefault()   
         setLoading(true)
-            await dispatch(addClients(data)
+            await dispatch(addMobile(data)
                 ).then(res=>{
                     console.log(res)
                     setEnregistrement(res.data.message)
@@ -52,9 +51,9 @@ const Client = (props) => {
             
     }
 
-    const UpdateClient = (e)=>{
+    const UpdateMobile = (e)=>{
         e.preventDefault()
-        axios.put(`http://localhost:8000/client/${client._id}`,data).then((res)=>{
+        axios.put(`http://localhost:8000/mobile/${mobile._id}`,data).then((res)=>{
             setMessage({
                 title : res.data.message, 
                 error : res.data.error
@@ -72,56 +71,46 @@ const Client = (props) => {
                 </Alert>}
             <form>
                 <div className='row'>
-                    <div className='col-md-6'>
+                    <div className='col-md-12'>
                         <div className='form-group'>              
-                            <Input type="text" placeholder= "Entrer les noms" 
+                            <Input type="text" placeholder= "Entrer le mobile" 
                             className='form-control' 
-                            name='noms'  
-                            value={noms}
+                            name='matricule'  
+                            value={matricule}
                             onChange={e => handleChange(e)} required/>
-                        </div>
-                        <div className='form-group'>                  
-                            <select className='form-control' 
-                            name='sexe' 
-                            value={sexe} 
-                            onChange={e => handleChange(e)}> 
-                                <option value="">None</option>
-                                <option value='M'>M</option>
-                                <option value='F'>F</option>
-                            </select>               
-                        </div>
+                        </div>                 
                         <div className='form-group'>                 
-                            <Input type="text" placeholder='Adresse' 
+                            <Input type="text" placeholder='Modele' 
                             className='form-control' 
-                            name='adresse' 
-                            value={adresse} 
+                            name='modele' 
+                            value={modele} 
                             onChange={e => handleChange(e)} required/>
                         </div>
                     </div>
-                    <div className='col-md-6'>
+                    <div className='col-md-12'>
                         <div className='form-group'>                   
-                            <Input type="tel" placeholder='+243...' 
+                            <Input type="text" placeholder='Marque' 
                             className='form-control' 
-                            name='telephone' 
-                            value={telephone} 
+                            name='marque' 
+                            value={marque} 
                             onChange={e => handleChange(e)} required/>
                         </div>
                         <div className='form-group'>                   
-                            <Input type="email" placeholder='Email...' 
+                            <Input type="email" placeholder='Moteur' 
                             className='form-control' 
-                            name='mail' 
-                            value={mail}
+                            name='moteur' 
+                            value={moteur}
                             onChange={e => handleChange(e)} required/>
                         </div>
                     </div>
                 </div>
                 <FormControl className='col-md-6'>
                     {
-                        !client && <button className="btn btn-success" disabled={loading} onClick={(e) => onSubmitClient(e)} style={{marginRight:"10px"}}>
+                        !mobile && <button className="btn btn-success" disabled={loading} onClick={(e) => onSubmitMobile(e)} style={{marginRight:"10px"}}>
                         {loading && <Refresh/>} Enregistrer </button> 
                     }
                     {
-                        client && <button className="btn btn-success boutton-classe" onClick={(e)=> UpdateClient(e)}>Modifier</button>
+                        mobile && <button className="btn btn-success boutton-classe" onClick={(e)=> UpdateMobile(e)}>Modifier</button>
                     }
                 </FormControl>
           </form>
@@ -129,4 +118,4 @@ const Client = (props) => {
     )
     
 }
-export default Client;
+export default Mobile;

@@ -36,6 +36,7 @@ const Paiement = (props) => {
     const [message, setMessage] = useState({
         title : "", error : ""
     });
+    console.log(data)
     const dispatch = useDispatch()
     const onSubmitPaiement = async (event)=>{
         event.preventDefault()   
@@ -67,25 +68,25 @@ const Paiement = (props) => {
     const [colise, setColise] = useState([]);
     const [person, setPerson] = useState([]);
     useEffect(()=>{
-      axios.get('http://localhost:8000/client/all')
+      axios.get('http://localhost:8000/client')
       .then(res =>{
         setRows(res.data.client)
       })
-    },[rows])
+    },[])
 
     console.log(rows)
     useEffect(()=>{
-      axios.get('http://localhost:8000/colis/all')
+      axios.get('http://localhost:8000/colis')
       .then(res =>{
         setColise(res.data.colis)
       })
-    },[colise])
+    },[])
     useEffect(()=>{
-      axios.get('http://localhost:8000/agent/all')
+      axios.get('http://localhost:8000/agent')
       .then(res =>{
         setPerson(res.data.agent)
       })
-    },[person])
+    },[])
 
 
     return(

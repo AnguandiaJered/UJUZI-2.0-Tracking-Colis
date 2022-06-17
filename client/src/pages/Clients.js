@@ -48,7 +48,7 @@ export const Clients = () =>{
     const [rows, setRows] = useState([])
     const [enregistrement, setEnregistrement] = useState()
     useEffect(()=>{
-      axios.get('http://localhost:8000/client/all')
+      axios.get('http://localhost:8000/client')
       .then(res =>{
         setRows(res.data.client)
       })

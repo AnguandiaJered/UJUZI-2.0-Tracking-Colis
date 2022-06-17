@@ -12,7 +12,7 @@ import {Cols} from './pages/Colis';
 import {Destinations} from './pages/Destinations';
 import {Expeditions} from './pages/Expeditions';
 import {Agents} from './pages/Agents';
-// import {Localisations} from './pages/Localisations';
+import {Mobiles} from './pages/Mobile';
 import Message from './pages/Message';
 import {Clients} from './pages/Clients';
 import {Sidebar} from './components/Sidebar';
@@ -35,7 +35,7 @@ function App() {
           <Route path='/destination' element={<Destinations/>} />
           <Route path='/agent' element={<Agents/>} />
           <Route path='/expedition' element={<Expeditions/>} />
-          {/* <Route path='/localisation' element={<Localisations/>} /> */}
+          <Route path='/mobile' element={<Mobiles/>} />
           <Route path='/paiement' element={<Paiements/>} />
           <Route path='/message' element={<Message/>} /> 
           {/* <Route path='/' render={() => (

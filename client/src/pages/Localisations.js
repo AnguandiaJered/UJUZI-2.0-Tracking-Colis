@@ -46,7 +46,7 @@ export const Localisations = () =>{
     const [rows, setRows] = useState([])
     const [enregistrement, setEnregistrement] = useState()
     useEffect(()=>{
-      axios.get('http://localhost:8000/localisation/all')
+      axios.get('http://localhost:8000/localisation')
       .then(res =>{
         setRows(res.data.localisation)
       })

@@ -47,7 +47,7 @@ export const Cols = () =>{
     const [rows, setRows] = useState([])
     const [enregistrement, setEnregistrement] = useState()
     useEffect(()=>{
-      axios.get('http://localhost:8000/colis/all')
+      axios.get('http://localhost:8000/colis')
       .then(res =>{
         setRows(res.data.colis)
       })

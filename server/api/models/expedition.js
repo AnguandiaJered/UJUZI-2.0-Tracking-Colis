@@ -4,7 +4,7 @@ const schemaExpedition = mongoose.Schema(
     {
         id: {
             type:String,
-            required:true,
+            required:true
         },
         client:{
             type: String,
@@ -43,6 +43,10 @@ const schemaExpedition = mongoose.Schema(
             required:true
         },
         heurearrivee:{
+            type:String,
+            required:true
+        },
+        mobile:{
             type:String,
             required:true
         },

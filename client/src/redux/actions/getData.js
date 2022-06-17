@@ -12,7 +12,7 @@ export const GET_USERS = "GET_USERS";
 
 export const getAgents = () => {
     return (dispatch) => {
-        return axios.get('http://localhost:8000/agent/all').then(res => {
+        return axios.get('http://localhost:8000/agent').then(res => {
             dispatch({
                 type: GET_AGENTS,
                 payload: res.data
@@ -23,7 +23,7 @@ export const getAgents = () => {
 
 export const getClients = () => {
     return (dispatch) => {
-        return axios.get('http://localhost:8000/client/all').then(res => {
+        return axios.get('http://localhost:8000/client').then(res => {
             dispatch({
                 type: GET_CLIENTS,
                 payload: res.data
@@ -34,7 +34,7 @@ export const getClients = () => {
 
 export const getColis = () => {
     return (dispatch) => {
-        return axios.get('http://localhost:8000/colis/all').then(res => {
+        return axios.get('http://localhost:8000/colis').then(res => {
             dispatch({
                 type: GET_COLIS,
                 payload: res.data
@@ -45,7 +45,7 @@ export const getColis = () => {
 
 export const getDestination = () => {
     return (dispatch) => {
-        return axios.get('http://localhost:8000/destination/all').then(res => {
+        return axios.get('http://localhost:8000/destination').then(res => {
             dispatch({
                 type: GET_DESTINATION,
                 payload: res.data
@@ -56,7 +56,7 @@ export const getDestination = () => {
 
 export const getExpedition = () => {
     return (dispatch) => {
-        return axios.get('http://localhost:8000/expedition/all').then(res => {
+        return axios.get('http://localhost:8000/expedition').then(res => {
             dispatch({
                 type: GET_EXPEDITION,
                 payload: res.data
@@ -67,7 +67,7 @@ export const getExpedition = () => {
 
 export const getLocalisation = () => {
     return (dispatch) => {
-        return axios.get('http://localhost:8000/localisation/all').then(res => {
+        return axios.get('http://localhost:8000/localisation').then(res => {
             dispatch({
                 type: GET_LOCALISATION,
                 payload: res.data
@@ -78,7 +78,7 @@ export const getLocalisation = () => {
 
 export const getPaiement = () => {
     return (dispatch) => {
-        return axios.get('http://localhost:8000/paiement/all').then(res => {
+        return axios.get('http://localhost:8000/paiement').then(res => {
             dispatch({
                 type: GET_PAIEMENT,
                 payload: res.data
@@ -89,7 +89,7 @@ export const getPaiement = () => {
 
 export const getUsers = () => {
     return (dispatch) => {
-        return axios.get('http://localhost:8000/users/all').then(res => {
+        return axios.get('http://localhost:8000/users').then(res => {
             dispatch({
                 type: GET_USERS,
                 payload: res.data
