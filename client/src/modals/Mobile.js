@@ -73,7 +73,7 @@ const Mobile = (props) => {
                 <div className='row'>
                     <div className='col-md-12'>
                         <div className='form-group'>              
-                            <Input type="text" placeholder= "Entrer le mobile" 
+                            <Input type="text" placeholder= "Entrer le matricule" 
                             className='form-control' 
                             name='matricule'  
                             value={matricule}

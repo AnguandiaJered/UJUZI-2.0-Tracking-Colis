@@ -6,6 +6,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Link } from 'react-router-dom';
 import Jered from '../images/Jered.JPG';
+import cres from '../images/cres.PNG';
 
 
 export const Logout = () => {
@@ -35,7 +36,7 @@ export const Logout = () => {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title" className='text-center log'>
-            <img className="rounded-circle" src={Jered} width={150} height={150} alt="" />
+            <img className="rounded-circle" src={cres} width={150} height={150} alt="" />
         </DialogTitle>
         <DialogContent  className="log">
           <DialogContentText className='text-center' id="alert-dialog-description">

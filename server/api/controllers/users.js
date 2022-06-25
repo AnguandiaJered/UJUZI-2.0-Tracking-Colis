@@ -70,10 +70,11 @@ exports.creatUsers = (req, res, next) => {
         );
 };
 
-exports.userLogin = (req, res) => {
-    User.find({ email: req.body.email })
+exports.userLogin = (req, res) => {    
+    User.findOne({ email: req.body.email })
         .then(
             (users) => {
+                console.log(users)
                 if (users.length < 1) {
                     res.status(401).json({
                         message: "Erreur lors de l'authentification"

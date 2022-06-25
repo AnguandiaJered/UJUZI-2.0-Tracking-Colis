@@ -1,4 +1,4 @@
-import React,{ useState,useEffect } from "react";
+import React,{ useState } from "react";
 import { Link } from "react-router-dom";
 import { FormControl, Input, InputLabel } from '@mui/material';
 import axios from "axios";
@@ -23,21 +23,21 @@ const Login = () => {
         title : "", error : ""
     });
 
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     const onSubmit = async (e)=>{
         e.preventDefault()   
         setLoading(true)
-            await axios.post('http://localhost:8000/users/singin',data)
+            await axios.post('http://localhost:8000/users/singin', data)
                 .then(res=>{
-                    // localStorage.setItem('token', res.data[0]);
-                    const results = res.data;
-                    localStorage.setItem("token", results['token'])
+                    localStorage.setItem("token", res.data.token);
+                    // const results = res.data;
+                    // localStorage.setItem("token", results['token'])
                     setMessage({
                         title : res.data.message, 
                         error : res.data.error
                     }) 
-                    history("/");
+                    navigate("/");
                 })              
             setLoading(false)   
     }

@@ -20,54 +20,44 @@ import {Sidebar} from './components/Sidebar';
 
 
 function App() {
-  const token = localStorage.getItem("token");
-    
+  const token = localStorage.getItem("token");    
+  console.log(token)
     return (
       <BrowserRouter>
         <Navbar />
         <Sidebar />
         <Routes>
           <Route exact path='/login' element={<Login/>} />
-          <Route exact path='/' element={<Dashboard/>} />
-          <Route path='/client' element={<Clients/>} />
-          <Route path='/users' element={<Utilisateur/>} />
-          <Route path='/colis' element={<Cols/>} />
-          <Route path='/destination' element={<Destinations/>} />
-          <Route path='/agent' element={<Agents/>} />
-          <Route path='/expedition' element={<Expeditions/>} />
-          <Route path='/mobile' element={<Mobiles/>} />
-          <Route path='/paiement' element={<Paiements/>} />
-          <Route path='/message' element={<Message/>} /> 
-          {/* <Route path='/' render={() => (
-                    token === "true" ? (<Dashboard/>) : (<Navigate to="/login"/>)
-                  )}/>     
-          <Route path='/users' render={() => (
-                token === "true" ? (<Utilisateur/>) : (<Navigate to="/login"/>)
-              )} />
-          <Route path='/client' render={() => (
-                      token === "true" ? (<Clients/>) : (<Navigate to="/login"/>)
-                  )}/>
-          <Route path='/colis' render={() => (
-                      token === "true" ? (<Cols/>) : (<Navigate to="/login"/>)
-                  )}/>
-          <Route path='/destination' render={() => (
-                      token === "true" ? (<Destinations/>) : (<Navigate to="/login"/>)
-                  )}/>
-          <Route path='/agent' render={() => (
-                      token === "true" ? (<Agents/>) : (<Navigate to="/login"/>)
-                  )}/>
-          <Route path='/expedition' render={() => (
-                      token === "true" ? (<Expeditions/>) : (<Navigate to="/login"/>)
-                  )}/>
-          <Route path='/localisation' render={() => (
-                      token === "true" ? (<Localisations/>) : (<Navigate to="/login"/>)
-                  )}/>
-          <Route path='/paiement' render={() => (
-                      token === "true" ? (<Paiements/>) : (<Navigate to="/login"/>)
-                  )}/>
-          <Route path='/message' render={() => (
-                      token === "true" ? (<Message/>) : (<Navigate to="/login"/>)
-                  )}/> */}
+          <Route exact path='/' element={
+                    token === "true" ? (<Dashboard/>) : (<Navigate replace to="/login"/>)
+                  }/>     
+          <Route path='/users' element={
+                token === "true" ? (<Utilisateur/>) : (<Navigate replace to="/login"/>)
+              } />
+          <Route path='/client' element={
+                      token === "true" ? (<Clients/>) : (<Navigate replace to="/login"/>)
+                  }/>
+          <Route path='/colis' element={
+                      token === "true" ? (<Cols/>) : (<Navigate replace to="/login"/>)
+                  }/>
+          <Route path='/destination' element={
+                      token === "true" ? (<Destinations/>) : (<Navigate replace to="/login"/>)
+                  }/>
+          <Route path='/agent' element={
+                      token === "true" ? (<Agents/>) : (<Navigate replace to="/login"/>)
+                  }/>
+          <Route path='/expedition' element={
+                      token === "true" ? (<Expeditions/>) : (<Navigate replace to="/login"/>)
+                  }/>
+          <Route path='/mobile' element={
+                      token === "true" ? (<Mobiles/>) : (<Navigate replace to="/login"/>)
+                  }/>
+          <Route path='/paiement' element={
+                      token === "true" ? (<Paiements/>) : (<Navigate replace to="/login"/>)
+                  }/>
+          <Route path='/message' element={
+                      token === "true" ? (<Message/>) : (<Navigate replace to="/login"/>)
+                  }/>
           <Route element={ErrorPage} />
         </Routes>
       </BrowserRouter>

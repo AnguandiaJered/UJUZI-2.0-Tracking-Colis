@@ -72,7 +72,7 @@ const Client = (props) => {
                 </Alert>}
             <form>
                 <div className='row'>
-                    <div className='col-md-6'>
+                    <div className='col-md-12'>
                         <div className='form-group'>              
                             <Input type="text" placeholder= "Entrer les noms" 
                             className='form-control' 
@@ -98,7 +98,7 @@ const Client = (props) => {
                             onChange={e => handleChange(e)} required/>
                         </div>
                     </div>
-                    <div className='col-md-6'>
+                    <div className='col-md-12'>
                         <div className='form-group'>                   
                             <Input type="tel" placeholder='+243...' 
                             className='form-control' 
