@@ -71,7 +71,7 @@ exports.creatUsers = (req, res, next) => {
 };
 
 exports.userLogin = (req, res) => {    
-    User.findOne({ email: req.body.email })
+    User.find({ email: req.body.email })
         .then(
             (users) => {
                 console.log(users)
@@ -102,7 +102,7 @@ exports.userLogin = (req, res) => {
                                 noms: users[0].noms,
                                 email: users[0].email,
                                 role: users[0].role,                               
-                                deleted: users[0].deleted,
+                                // deleted: users[0].deleted,
                             };
                             console.log(response.role);                         
                             
@@ -156,7 +156,7 @@ exports.findUsers = (req, res) => {
                             email: r.email,
                             password: r.password,
                             role: r.role,                           
-                            deleted: r.deleted,
+                            // deleted: r.deleted,
                         })
 
                     })
@@ -217,7 +217,7 @@ exports.updateUsers = (req, res) => {
         email: req.body.email,
         password: req.body.password,
         role: req.body.role,
-        deleted: req.body.deleted,
+        // deleted: req.body.deleted,
         
     });
  
@@ -254,7 +254,7 @@ exports.updateUsers = (req, res) => {
                                             email: users.email,
                                             password: users.password,
                                             role: users.role,                                           
-                                            deleted: users.deleted
+                                            // deleted: users.deleted
                                         };
                                         res.status(200).json({
                                             message: "Le compte a été modifié avec succès",

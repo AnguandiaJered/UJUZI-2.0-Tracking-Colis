@@ -3,12 +3,11 @@ import { Link } from "react-router-dom";
 import { FormControl, Input, InputLabel } from '@mui/material';
 import axios from "axios";
 import Alert from '@mui/material/Alert';
-import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
 
-    axios.defaults.withCredentials = true;
+
     const [loading, setLoading] = useState(false)
     const [data,setData] = useState({
         email:"",
@@ -23,21 +22,19 @@ const Login = () => {
         title : "", error : ""
     });
 
-    const navigate = useNavigate();
 
     const onSubmit = async (e)=>{
         e.preventDefault()   
         setLoading(true)
             await axios.post('http://localhost:8000/users/singin', data)
                 .then(res=>{
-                    localStorage.setItem("token", res.data.token);
-                    // const results = res.data;
-                    // localStorage.setItem("token", results['token'])
+                    localStorage.setItem("token", res.data.token);                    
+                    localStorage.setItem("token", true)
                     setMessage({
                         title : res.data.message, 
                         error : res.data.error
                     }) 
-                    navigate("/");
+                    window.location.replace("/");
                 })              
             setLoading(false)   
     }
@@ -56,12 +53,12 @@ const Login = () => {
                 <div className="login">
                     <div className="container">               
                         <div className="row">
-                            <div className="col-md-6 offset-3 mt-3">
+                            <div className="col-md-6 offset-3 mt-5">
                             {message.error !== "" && 
                             <Alert variant="filled" style={{marginBottom:"10px"}} severity={message.error}>
                                 <h6>{message.title}</h6>
                             </Alert>}
-                                <div className="portlet-green mt-3 ">
+                                <div className="portlet-green mt-5 ">
                                     <div className="login-heading">
                                         <div className="title text-center">
                                             <h4>

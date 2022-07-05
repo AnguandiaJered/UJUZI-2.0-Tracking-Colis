@@ -26,10 +26,10 @@ const schemaUsers = mongoose.Schema(
             type: Date,
             default: Date.now
         },
-        deleted: {
-            type: Boolean,
-            default: false,
-        }
+        // deleted: {
+        //     type: Boolean,
+        //     default: false,
+        // }
     },
 );
 

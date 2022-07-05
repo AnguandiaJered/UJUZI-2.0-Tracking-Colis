@@ -8,7 +8,6 @@ const destination = require('../controllers/destination');
 const agent = require('../controllers/agent');
 const expedition = require('../controllers/expedition');
 const paiement = require('../controllers/paiement');
-// const localisation = require('../controllers/localisation');
 const mobile = require('../controllers/mobile');
 const nodemailer = require('nodemailer');
 
@@ -66,13 +65,6 @@ router.get('/paiement/single/:paiementId', checkAut,paiement.getSinglePaiement);
 router.put('/paiement/:paiementId', paiement.updatePaiement);
 router.delete('/paiement/:paiementId', paiement.deletePaiement);
 
-// localisation roots
-// router.post('/localisation', localisation.createLocalisation);
-// router.get('/localisation', localisation.findLocalisation);
-// router.get('/localisation/single/:localisationId', checkAut,localisation.getSingleLocalisation);
-// router.put('/localisation/:localisationId', checkAut,localisation.updateLocalisation);
-// router.delete('/localisation/:localisationId', checkAut,localisation.deleteLocalisation);
-
 // mobile roots
 router.post('/mobile', mobile.createMobile);
 router.get('/mobile', mobile.findMobile);
@@ -86,8 +78,8 @@ router.post('/message', (req,res) => {
         service:'gmail',
         // port:465,
         auth:{
-            user:'anguandiatsandijered03@gmail.com',
-            pass:''
+            user:'anguandiajered18@gmail.com',
+            pass:'jered@armageddon1997'
         }
     });
     const mailOptions = {

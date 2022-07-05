@@ -5,7 +5,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Link } from 'react-router-dom';
-import Jered from '../images/Jered.JPG';
+// import Jered from '../images/Jered.JPG';
 import cres from '../images/cres.PNG';
 
 
@@ -22,6 +22,7 @@ export const Logout = () => {
 
   const logout = () =>{
     localStorage.removeItem("token");
+    window.location.replace("/login");
   }
 
   return (
